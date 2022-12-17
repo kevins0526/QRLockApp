@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">QRLockApp</string>
+    <string name="foo">你好 世界!</string>
+    <string name="icon_msg">圖標</string>
+    <string name="vision">Beta</string>
+    <string name="name_msg"></string>
+    <string name="password_msg"></string>
+    <string name="name_hint">請輸入帳號</string>
+    <string name="password_hint">請輸入密碼</string>
+    <string name="login">登入</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="message">訊息</string>
+    <string name="setting">設定</string>
+    <string name="qrcode">QRCode</string>
+    <string name="testpc">pc</string>
+    <string name="testptcure">testpc</string>
+</resources>

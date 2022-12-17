@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue2"
+    android:theme="@style/Theme.AppCompat"
+    android:screenOrientation="portrait"
+    android:configChanges="orientation"
+    tools:context=".MainActivity2">
+
+    <FrameLayout
+        android:id="@+id/FrameLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/fragment2btn"
+        android:layout_width="106dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/blue1"
+        android:text="@string/message"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/fragment3btn"
+        app:layout_constraintHorizontal_bias="0.525"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/fragment1btn"
+        android:layout_width="106dp"
+        android:layout_height="83dp"
+        android:background="@color/blue1"
+        android:text="@string/qrcode"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment2btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragment2btn"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/fragment3btn"
+        android:layout_width="106dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="41dp"
+        android:background="@color/blue1"
+        android:text="@string/setting"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment2btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragment2btn"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="TextContrastCheck" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.84" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
