@@ -33,7 +33,8 @@
         android:layout_marginEnd="85dp"
         android:layout_marginBottom="121dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/create_btn"
@@ -44,6 +45,7 @@
         android:layout_marginEnd="159dp"
         android:layout_marginBottom="54dp"
         android:background="@color/blue1"
-        android:textColor="@color/black"
-        android:text="create" />
+        android:backgroundTint="@null"
+        android:text="create"
+        android:textColor="@color/white" />
 </RelativeLayout>
