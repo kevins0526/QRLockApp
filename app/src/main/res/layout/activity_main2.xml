@@ -24,9 +24,9 @@
 
     <Button
         android:id="@+id/fragment2btn"
-        android:layout_width="106dp"
-        android:layout_height="83dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="78dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="4dp"
         android:background="@color/blue1"
         android:text="@string/message"
         android:textColor="@color/white"
@@ -36,12 +36,14 @@
         app:layout_constraintEnd_toEndOf="@+id/fragment3btn"
         app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:layout_constraintVertical_bias="0.533"
         tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/fragment1btn"
-        android:layout_width="106dp"
-        android:layout_height="83dp"
+        android:layout_width="78dp"
+        android:layout_height="54dp"
         android:background="@color/blue1"
         android:text="@string/qrcode"
         android:textColor="@color/white"
@@ -49,7 +51,7 @@
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="@+id/fragment2btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fragment2btn"
         app:layout_constraintVertical_bias="1.0"
@@ -57,8 +59,8 @@
 
     <Button
         android:id="@+id/fragment3btn"
-        android:layout_width="106dp"
-        android:layout_height="83dp"
+        android:layout_width="78dp"
+        android:layout_height="54dp"
         android:layout_marginBottom="41dp"
         android:background="@color/blue1"
         android:text="@string/setting"
@@ -67,7 +69,7 @@
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="@+id/fragment2btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintHorizontal_bias="0.951"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fragment2btn"
         app:layout_constraintVertical_bias="0.0"
@@ -78,6 +80,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.84" />
+        app:layout_constraintGuide_percent="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -69,12 +69,9 @@ dependencies {
     //以下是聊天室功能(先取消)
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
-//    implementation 'com.google.android.material:material:1.0.0'
+    //implementation 'com.google.android.material:material:1.0.0'
 //    implementation 'com.firebaseui:firebase-ui:1.1.1'
-//
-//    implementation 'com.google.firebase:firebase-database:17.0.0'
-//    implementation 'com.google.firebase:firebase-core:16.0.9'
-//    implementation 'com.google.firebase:firebase-auth:16.0.1'
+//    //implementation 'com.google.firebase:firebase-core:16.0.9'
 //
 //// FirebaseUI for Cloud Firestore
 //    implementation 'com.firebaseui:firebase-ui-firestore:5.0.0'
