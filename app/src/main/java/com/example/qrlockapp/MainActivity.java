@@ -2,6 +2,8 @@ package com.example.qrlockapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button button = findViewById(R.id.button);
-
+        TextView textView = findViewById(R.id.forgotPassword);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user=mAuth.getCurrentUser();
         button.setOnClickListener(new View.OnClickListener(){
@@ -93,6 +95,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, forgotPassword.class);
+                startActivity(intent);
+            }
+        });
     }
 }

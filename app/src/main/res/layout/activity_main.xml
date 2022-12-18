@@ -49,19 +49,22 @@
         app:layout_constraintVertical_bias="0.13" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="72dp"
-        android:layout_height="43dp"
+        android:id="@+id/forgotPassword"
+        android:layout_width="85dp"
+        android:layout_height="24dp"
         android:layout_marginBottom="35dp"
-        android:text="@string/vision"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/forgotPassword"
         android:textAlignment="center"
         android:textColor="#607D8B"
-        android:textSize="24sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wrong"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.95"
+        tools:ignore="TextContrastCheck" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -89,7 +92,7 @@
         android:textStyle="bold"
         android:typeface="normal"
         app:backgroundTint="@null"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/forgotPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword"
