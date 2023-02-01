@@ -18,8 +18,8 @@
         android:layout_above="@id/create_btn"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="53dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
         android:layout_marginBottom="76dp" />
 
     <Button
