@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue2"
-    android:theme="@style/Theme.AppCompat"
-    android:screenOrientation="portrait"
+    android:background="@color/white"
     android:configChanges="orientation"
+    android:screenOrientation="portrait"
+    android:theme="@style/Theme.AppCompat"
     tools:context=".MainActivity2">
 
     <FrameLayout
@@ -24,10 +24,10 @@
 
     <Button
         android:id="@+id/fragment2btn"
-        android:layout_width="78dp"
-        android:layout_height="54dp"
+        android:layout_width="95dp"
+        android:layout_height="62dp"
         android:layout_marginBottom="4dp"
-        android:background="@color/blue1"
+        android:background="@drawable/button_roundle"
         android:text="@string/message"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -37,14 +37,14 @@
         app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:layout_constraintVertical_bias="0.533"
+        app:layout_constraintVertical_bias="0.64"
         tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/fragment1btn"
-        android:layout_width="78dp"
-        android:layout_height="54dp"
-        android:background="@color/blue1"
+        android:layout_width="95dp"
+        android:layout_height="62dp"
+        android:background="@drawable/button_roundle"
         android:text="@string/qrcode"
         android:textColor="@color/white"
         android:textSize="16sp"
@@ -59,10 +59,10 @@
 
     <Button
         android:id="@+id/fragment3btn"
-        android:layout_width="78dp"
-        android:layout_height="54dp"
+        android:layout_width="95dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="41dp"
-        android:background="@color/blue1"
+        android:background="@drawable/button_roundle"
         android:text="@string/setting"
         android:textColor="@color/white"
         android:textSize="20sp"

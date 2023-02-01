@@ -8,8 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="fragment1color">#FF018786</color>
-    <color name="gray">#EEEEF3</color>
-    <color name="blue1">#A5C3CE</color>
+    <color name="gray">#fafafa</color>
+    <color name="blue1">#3f6cdf</color>
     <color name="blue2">#B4C9D9</color>
     <color name="blue3">#7294b6</color>
 </resources>

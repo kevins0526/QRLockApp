@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@color/white"
     android:configChanges="orientation"
     android:screenOrientation="portrait"
     android:theme="@style/Theme.AppCompat"
@@ -57,7 +57,7 @@
         android:focusable="true"
         android:text="@string/forgotPassword"
         android:textAlignment="center"
-        android:textColor="#607D8B"
+        android:textColor="#3f6cdf"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,22 +68,22 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="196dp"
-        android:layout_height="243dp"
+        android:layout_width="220dp"
+        android:layout_height="264dp"
         android:contentDescription="@string/icon_msg"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         app:layout_constraintVertical_bias="0.214"
-        app:srcCompat="@drawable/icon" />
+        app:srcCompat="@drawable/qrcode_icon" />
 
     <Button
         android:id="@+id/button"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="135dp"
         android:layout_height="66dp"
-        android:background="@color/blue2"
+        android:background="@drawable/button_roundle"
         android:text="@string/login"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
