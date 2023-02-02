@@ -18,7 +18,7 @@ public class MainActivity2 extends AppCompatActivity {
         firstFragmentBtn = findViewById(R.id.fragment1btn);
         secondFragmentBtn = findViewById(R.id.fragment2btn);
         thirdFragmentBtn = findViewById(R.id.fragment3btn);
-
+        replaceFragment(new fragment1());
         firstFragmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
