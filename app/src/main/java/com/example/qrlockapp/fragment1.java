@@ -35,25 +35,8 @@ public class fragment1 extends Fragment implements View.OnClickListener{
         CreateBtn = (Button) myView.findViewById(R.id.create_btn);
         CreateBtn.setOnClickListener(this);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference password = database.getReference("password"); //讀取的根結點
-        password.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                TextView password = (TextView)getView().findViewById(R.id.seepassword);
-                password.setText(value);
-            }
+        getFirebaseValue();
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("TAG", "Failed to read value.", error.toException());
-            }
-        });
-        //getCode();
         return  myView;
     }
     public void getCode() {
@@ -76,4 +59,25 @@ public class fragment1 extends Fragment implements View.OnClickListener{
         getCode();
     }
 
+    public void getFirebaseValue(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference password = database.getReference("password"); //讀取的根結點
+        password.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                TextView password = (TextView)getView().findViewById(R.id.seepassword);
+                password.setText(value);
+                getCode(); //目前不確定firebase資料庫更新會不會造成閃退 但不更改不報錯
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("TAG", "Failed to read value.", error.toException());
+            }
+        });
+    }
 }

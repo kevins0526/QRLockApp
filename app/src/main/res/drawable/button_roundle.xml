@@ -10,7 +10,7 @@
             <!--邊框-->
             <stroke android:width="1dip" android:color="#538394" />
             <!--漸層顏色-->
-            <gradient android:angle="-90" android:startColor="#0099CC" android:endColor="#017DAB"  />
+            <gradient android:angle="-90" android:startColor="#4F77DB" android:endColor="#4F77DB"  />
         </shape>
     </item>
 

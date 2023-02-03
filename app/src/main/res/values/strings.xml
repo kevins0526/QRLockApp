@@ -21,4 +21,6 @@
     <string name="forgotAccount_description">請輸入您的信箱，我們將會傳送信箱到您的郵件地址。並請您透過信箱去完成更改密碼的手續。 </string>
     <string name="submit">送出</string>
     <string name="forgotAccount_already_send_email">我們已經寄送更改密碼的信件到您信箱囉!</string>
+    <string name="password_icon">password_icon</string>
+    <string name="account_icon">account_icon</string>
 </resources>

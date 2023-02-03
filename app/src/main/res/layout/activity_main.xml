@@ -12,9 +12,10 @@
 
     <EditText
         android:id="@+id/etPassword"
-        android:layout_width="226dp"
-        android:layout_height="63dp"
+        android:layout_width="290dp"
+        android:layout_height="55dp"
         android:autofillHints=""
+        android:background="@drawable/edit_text_roundle"
         android:backgroundTint="@color/black"
         android:ems="10"
         android:hint="@string/password_hint"
@@ -24,17 +25,32 @@
         android:textColorHint="#616161"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.702"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUsername"
-        app:layout_constraintVertical_bias="0.100000024"
+        app:layout_constraintVertical_bias="0.106"
         tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/password_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/etPassword"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.046"
+        app:srcCompat="@drawable/pas" />
 
     <EditText
         android:id="@+id/etUsername"
-        android:layout_width="226dp"
-        android:layout_height="63dp"
+        android:layout_width="290dp"
+        android:layout_height="55dp"
         android:autofillHints=""
+        android:background="@drawable/edit_text_roundle"
         android:backgroundTint="@color/black"
         android:ems="10"
         android:hint="@string/name_hint"
@@ -44,9 +60,10 @@
         android:textColorHint="#616161"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.702"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintVertical_bias="0.112" />
 
     <TextView
         android:id="@+id/forgotPassword"
@@ -64,18 +81,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wrong"
         app:layout_constraintVertical_bias="0.95"
-        tools:ignore="TextContrastCheck" />
+        tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="220dp"
-        android:layout_height="264dp"
+        android:layout_width="198dp"
+        android:layout_height="229dp"
         android:contentDescription="@string/icon_msg"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.214"
+        app:layout_constraintVertical_bias="0.666"
         app:srcCompat="@drawable/qrcode_icon" />
 
     <Button
@@ -96,7 +114,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword"
-        app:layout_constraintVertical_bias="0.48000002"
+        app:layout_constraintVertical_bias="0.631"
         app:rippleColor="@color/white"
         tools:ignore="TextContrastCheck" />
 
@@ -112,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.44" />
+        app:layout_constraintGuide_percent="0.45" />
 
     <TextView
         android:id="@+id/wrong"
@@ -122,22 +140,43 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline5"
-        app:layout_constraintVertical_bias="0.96" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="522dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.74" />
+        app:layout_constraintGuide_percent="0.77" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:contentDescription="@string/account_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/etUsername"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintVertical_bias="0.112"
+        app:srcCompat="@drawable/account" />
+
+    <CheckBox
+        android:id="@+id/remember_account"
+        android:layout_width="154dp"
+        android:layout_height="35dp"
+        android:buttonTint="@color/black"
+        android:minHeight="48dp"
+        android:text="記住我的帳密"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.062"
+        tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
