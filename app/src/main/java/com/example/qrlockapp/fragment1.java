@@ -41,19 +41,21 @@ public class fragment1 extends Fragment implements View.OnClickListener{
     }
     public void getCode() {
         ImageView ivCode = (ImageView)getView().findViewById(R.id.imageView4);
-        //mixKey(etContent.getText().toString());
         TextView password = (TextView)getView().findViewById(R.id.seepassword);
+        String AesPassword = mixKey(password.getText().toString());
+        updateFirebaseValue(AesPassword); //傳加密後密碼到firebase
         BarcodeEncoder encoder = new BarcodeEncoder();
         try {
-            Bitmap bit = encoder.encodeBitmap(password.getText().toString()
-                    , BarcodeFormat.QR_CODE, 1000, 1000);
+            Bitmap bit = encoder.encodeBitmap(AesPassword, BarcodeFormat.QR_CODE, 1000, 1000);
             ivCode.setImageBitmap(bit);
         } catch (WriterException e) {
             e.printStackTrace();
         }
     }
-    public void mixKey(String origin){ //混合原始資料
-
+    public String mixKey(String aes){ //混合原始資料
+        String str=AES.encrypt(aes);
+        //Log.i("-=-=解密",AES.decrypt(str));
+        return str;
     }
     public void onClick(View v) {
         getCode();
@@ -79,5 +81,10 @@ public class fragment1 extends Fragment implements View.OnClickListener{
                 Log.w("TAG", "Failed to read value.", error.toException());
             }
         });
+    }
+    public void updateFirebaseValue(String AesPas){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference AesPassword = database.getReference("AesPassword"); //讀取的根結點
+        AesPassword.setValue(AesPas);
     }
 }
