@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
@@ -25,7 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class fragment1 extends Fragment implements View.OnClickListener{
-
+    private FirebaseAuth mAuth;
     Button CreateBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  //fragment 視圖
@@ -84,7 +86,10 @@ public class fragment1 extends Fragment implements View.OnClickListener{
     }
     public void updateFirebaseValue(String AesPas){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference AesPassword = database.getReference("AesPassword"); //讀取的根結點
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user=mAuth.getCurrentUser();
+        String uid = user.getUid();
+        DatabaseReference AesPassword = database.getReference(uid+"/AesPassword"); //讀取的根結點
         AesPassword.setValue(AesPas);
     }
 }

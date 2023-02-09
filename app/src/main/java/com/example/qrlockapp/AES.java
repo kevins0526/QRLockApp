@@ -53,7 +53,7 @@ public class AES {
     /**
      * 加密密码，长度：16 或 32 个字符(随便定义)
      */
-    private static final String secretKey = "qweasd123";
+    private static final String secretKey = "Chin-Yi_E531_lab";
     /**
      * AES 加密
      *
