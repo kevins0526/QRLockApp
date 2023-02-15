@@ -55,8 +55,9 @@ public class fragment1 extends Fragment implements View.OnClickListener{
         }
     }
     public String mixKey(String aes){ //混合原始資料
-        String str=AES.encrypt(aes);
+        //String str=AES.encrypt(aes);
         //Log.i("-=-=解密",AES.decrypt(str));
+        String str=AES.cbcEncrypt(aes,"1234567812345656");
         return str;
     }
     public void onClick(View v) {

@@ -5,17 +5,10 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
-import java.io.Closeable;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import javax.crypto.Cipher;
-import javax.crypto.CipherInputStream;
-import javax.crypto.CipherOutputStream;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -94,7 +87,35 @@ public class AES {
         }
         return null;
     }
-
+    //CBC
+    public static String cbcEncrypt(String data, String ivParameter){
+        try {
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            //使用CBC模式，需要一个向量iv，可增加加密算法的强度
+            IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes(StandardCharsets.UTF_8));
+            cipher.init(Cipher.ENCRYPT_MODE, getSecretKey(secretKey), iv);
+            byte[] encrypted = cipher.doFinal(data.getBytes(CHARSET_UTF8));
+            //此处使用BASE64做转码。
+            return base64Encode(encrypted);
+        }catch (Exception e){
+            handleException(e);
+        }
+        return null;
+    }
+    public static String cbcDecrypt(String data,String ivParameter){
+        try {
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes(StandardCharsets.UTF_8));
+            cipher.init(Cipher.DECRYPT_MODE, getSecretKey(secretKey), iv);
+            //先用base64解密
+            byte[] encrypted1 = base64Decode(data);
+            byte[] original = cipher.doFinal(encrypted1);
+            return new String(original, StandardCharsets.UTF_8);
+        }catch (Exception e){
+            handleException(e);
+        }
+        return null;
+    }
     /**
      * 使用密码获取 AES 秘钥
      */
@@ -152,114 +173,4 @@ public class AES {
         Log.e(TAG, TAG + e);
     }
 
-    /**
-     * 对文件进行AES加密
-     *
-     * @param sourceFile 待加密文件
-     * @param dir        加密后的文件存储路径
-     * @param toFileName 加密后的文件名称
-     * @param secretKey  密钥
-     * @return 加密后的文件
-     */
-    public static File encryptFile(File sourceFile, String dir, String toFileName, String secretKey) {
-        try {
-            // 创建加密后的文件
-            File encryptFile = new File(dir, toFileName);
-            // 根据文件创建输出流
-            FileOutputStream outputStream = new FileOutputStream(encryptFile);
-            // 初始化 Cipher
-            Cipher cipher = initFileAESCipher(secretKey, Cipher.ENCRYPT_MODE);
-            // 以加密流写入文件
-            CipherInputStream cipherInputStream = new CipherInputStream(
-                    new FileInputStream(sourceFile), cipher);
-            // 创建缓存字节数组
-            byte[] buffer = new byte[1024 * 2];
-            // 读取
-            int len;
-            // 读取加密并写入文件
-            while ((len = cipherInputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, len);
-                outputStream.flush();
-            }
-            // 关闭加密输入流
-            cipherInputStream.close();
-            closeStream(outputStream);
-            return encryptFile;
-        } catch (Exception e) {
-            handleException(e);
-        }
-        return null;
-    }
-
-    /**
-     * AES解密文件
-     *
-     * @param sourceFile 源加密文件
-     * @param dir        解密后的文件存储路径
-     * @param toFileName 解密后的文件名称
-     * @param secretKey  密钥
-     */
-    public static File decryptFile(File sourceFile, String dir, String toFileName, String secretKey) {
-        try {
-            // 创建解密文件
-            File decryptFile = new File(dir, toFileName);
-            // 初始化Cipher
-            Cipher cipher = initFileAESCipher(secretKey, Cipher.DECRYPT_MODE);
-            // 根据源文件创建输入流
-            FileInputStream inputStream = new FileInputStream(sourceFile);
-            // 获取解密输出流
-            CipherOutputStream cipherOutputStream = new CipherOutputStream(
-                    new FileOutputStream(decryptFile), cipher);
-            // 创建缓冲字节数组
-            byte[] buffer = new byte[1024 * 2];
-            int len;
-            // 读取解密并写入
-            while ((len = inputStream.read(buffer)) >= 0) {
-                cipherOutputStream.write(buffer, 0, len);
-                cipherOutputStream.flush();
-            }
-            // 关闭流
-            cipherOutputStream.close();
-            closeStream(inputStream);
-            return decryptFile;
-        } catch (IOException e) {
-            handleException(e);
-        }
-        return null;
-    }
-
-    /**
-     * 初始化 AES Cipher
-     *
-     * @param secretKey  密钥
-     * @param cipherMode 加密模式
-     * @return 密钥
-     */
-    private static Cipher initFileAESCipher(String secretKey, int cipherMode) {
-        try {
-            // 创建密钥规格
-            SecretKeySpec secretKeySpec = getSecretKey(secretKey);
-            // 获取密钥
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            // 初始化
-            cipher.init(cipherMode, secretKeySpec, new IvParameterSpec(new byte[cipher.getBlockSize()]));
-            return cipher;
-        } catch (Exception e) {
-            handleException(e);
-        }
-        return null;
-    }
-
-    /**
-     * 关闭流
-     *
-     * @param closeable 实现Closeable接口
-     */
-    private static void closeStream(Closeable closeable) {
-        try {
-            if (closeable != null) closeable.close();
-        } catch (Exception e) {
-            handleException(e);
-        }
-    }
 }
