@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/qrlock_bg"
     android:configChanges="orientation"
     android:screenOrientation="portrait"
     android:theme="@style/Theme.AppCompat"
@@ -17,33 +17,21 @@
         android:autofillHints=""
         android:background="@drawable/edit_text_roundle"
         android:backgroundTint="@color/black"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
+        android:drawablePadding="8dp"
         android:ems="10"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
+        android:padding="8dp"
         android:text="@string/password_msg"
         android:textColor="@color/black"
         android:textColorHint="#616161"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline8"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/etUsername"
         app:layout_constraintVertical_bias="0.092"
         tools:ignore="SpeakableTextPresentCheck,TextContrastCheck" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/password_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.089"
-        app:srcCompat="@drawable/pas" />
 
     <EditText
         android:id="@+id/etUsername"
@@ -52,16 +40,18 @@
         android:autofillHints=""
         android:background="@drawable/edit_text_roundle"
         android:backgroundTint="@color/black"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:drawablePadding="8dp"
         android:ems="10"
         android:hint="@string/name_hint"
         android:inputType="textPersonName"
+        android:padding="8dp"
         android:text="@string/name_msg"
         android:textColor="@color/black"
         android:textColorHint="#616161"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline8"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         app:layout_constraintVertical_bias="0.122" />
 
@@ -82,19 +72,6 @@
         app:layout_constraintTop_toBottomOf="@+id/button"
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="198dp"
-        android:layout_height="229dp"
-        android:contentDescription="@string/icon_msg"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.666"
-        app:srcCompat="@drawable/qrcode_icon" />
 
     <Button
         android:id="@+id/button"
@@ -131,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
+        app:layout_constraintGuide_percent="0.42" />
 
     <TextView
         android:id="@+id/wrong"
@@ -149,19 +126,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.78" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:contentDescription="@string/account_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:layout_constraintVertical_bias="0.145"
-        app:srcCompat="@drawable/account" />
 
     <CheckBox
         android:id="@+id/remember_account"
