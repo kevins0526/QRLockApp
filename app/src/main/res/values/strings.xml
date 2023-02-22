@@ -23,4 +23,16 @@
     <string name="forgotAccount_already_send_email">我們已經寄送更改密碼的信件到您信箱囉!</string>
     <string name="password_icon">password_icon</string>
     <string name="account_icon">account_icon</string>
+    <string name="qrcode_image">QRcode_image</string>
+    <string name="refresh">刷新</string>
+    <string name="guest_eky">訪客鑰匙</string>
+    <string name="title_activity_guest_key">guest_key</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

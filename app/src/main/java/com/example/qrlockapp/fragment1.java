@@ -1,5 +1,6 @@
 package com.example.qrlockapp;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -26,19 +27,30 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class fragment1 extends Fragment implements View.OnClickListener{
+public class fragment1 extends Fragment{
     private FirebaseAuth mAuth;
-    Button CreateBtn;
+    Button CreateBtn,GuestBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,  //fragment 視圖
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View myView = inflater.inflate(R.layout.fragment_fragment1, container, false);
         CreateBtn = (Button) myView.findViewById(R.id.create_btn);
-        CreateBtn.setOnClickListener(this);
-
+        GuestBtn = (Button) myView.findViewById(R.id.guest_btn);
+        //CreateBtn.setOnClickListener(this);
         getFirebaseValue();
-
+        CreateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getCode();
+            }
+        });
+        GuestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                jumptoguest();
+            }
+        });
         return  myView;
     }
     public void getCode() {
@@ -60,9 +72,9 @@ public class fragment1 extends Fragment implements View.OnClickListener{
         String str=AES.cbcEncrypt(aes,"1234567812345656");
         return str;
     }
-    public void onClick(View v) {
-        getCode();
-    }
+//    public void onClick(View v) {
+//        getCode();
+//    }
 
     public void getFirebaseValue(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -92,5 +104,9 @@ public class fragment1 extends Fragment implements View.OnClickListener{
         String uid = user.getUid();
         DatabaseReference AesPassword = database.getReference(uid+"/AesPassword"); //讀取的根結點
         AesPassword.setValue(AesPas);
+    }
+    public void jumptoguest(){
+        Intent intent = new Intent(getActivity(),forgotPassword.class);
+        startActivity(intent);
     }
 }
