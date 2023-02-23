@@ -63,9 +63,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="21dp"
-        android:layout_marginTop="631dp"
+        android:layout_marginTop="634dp"
         android:layout_marginEnd="302dp"
-        android:layout_marginBottom="52dp"
-        android:text="Button" />
+        android:layout_marginBottom="49dp"
+        android:background="@drawable/button_roundle"
+        android:text="訪客" />
 
 </RelativeLayout>

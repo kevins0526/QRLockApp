@@ -48,7 +48,7 @@ public class fragment1 extends Fragment{
         GuestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                jumptoguest();
+                jumpToGuest();
             }
         });
         return  myView;
@@ -105,8 +105,8 @@ public class fragment1 extends Fragment{
         DatabaseReference AesPassword = database.getReference(uid+"/AesPassword"); //讀取的根結點
         AesPassword.setValue(AesPas);
     }
-    public void jumptoguest(){
-        Intent intent = new Intent(getActivity(),forgotPassword.class);
+    public void jumpToGuest(){
+        Intent intent = new Intent(getActivity(),guestKey.class);
         startActivity(intent);
     }
 }
