@@ -103,7 +103,10 @@ public class fragment1 extends Fragment{
         FirebaseUser user=mAuth.getCurrentUser();
         String uid = user.getUid();
         DatabaseReference AesPassword = database.getReference(uid+"/AesPassword"); //讀取的根結點
+        DatabaseReference ivKey=database.getReference(uid+"/ivKey");
+        ivKey.setValue("i am kei");
         AesPassword.setValue(AesPas);
+
     }
     public void jumpToGuest(){
         Intent intent = new Intent(getActivity(),guestKey.class);
