@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/eName"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="姓名" />
+        <EditText
+            android:id="@+id/eAge"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="number"
+            android:hint="年齡"/>
+        <EditText
+            android:id="@+id/eSex"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="性別"/>
+        <EditText
+            android:id="@+id/eBirthday"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:inputType="date"
+            android:hint="生日"/>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/button_roundle"
+            android:text="完成"
+            android:textColor="@color/white"
+            android:textSize="20sp"></Button>
+    </LinearLayout>
+</RelativeLayout>

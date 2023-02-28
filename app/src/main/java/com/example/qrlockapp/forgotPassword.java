@@ -29,9 +29,7 @@ public class forgotPassword extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(forgotPassword.this, MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
         mAuth = FirebaseAuth.getInstance();

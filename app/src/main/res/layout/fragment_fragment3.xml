@@ -3,18 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue2"
+    android:background="@color/gray"
     android:screenOrientation="portrait"
     android:configChanges="orientation"
     tools:context=".fragment3">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="fragment 3"
-        android:textColor="@color/black"
-        android:textSize="30sp" />
+    <Button
+        android:id="@+id/profileBtn"
+        android:layout_width="346dp"
+        android:layout_height="103dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="544dp"
+        android:background="@drawable/button_roundle_white"
+        android:text="個人資料設定"
+        android:textSize="35sp" />
 
 </RelativeLayout>

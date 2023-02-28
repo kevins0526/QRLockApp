@@ -15,6 +15,13 @@
         android:theme="@style/Theme.QRLockApp"
         tools:targetApi="31">
         <activity
+            android:name=".profile"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".guestKey"
             android:exported="false">
             <meta-data
