@@ -31,7 +31,7 @@ public class profile extends AppCompatActivity {
         backBtn = findViewById(R.id.backBtn);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter Date");
+        builder.setTitle("更新資料");
         View view = getLayoutInflater().inflate(R.layout.updateprofile_dialog, null);
         EditText eName,eAge,eSex,eBirthday;
         eName = view.findViewById(R.id.eName);
