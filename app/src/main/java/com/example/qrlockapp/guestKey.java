@@ -1,157 +1,102 @@
 package com.example.qrlockapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 public class guestKey extends AppCompatActivity {
-    DatePickerDialog.OnDateSetListener datePickerListener;
-    DatePickerDialog.OnDateSetListener datePickerListener2;
-    TimePickerDialog.OnTimeSetListener timePickerListener;
-    TimePickerDialog.OnTimeSetListener timePickerListener2;
-    DatePickerDialog datePickerDialog,datePickerDialog2;
-    //時間選擇視窗
-    TimePickerDialog timePickerDialog,timePickerDialog2;
-    Calendar calendar,calendar2;
-    //格式化
-    SimpleDateFormat sdfDate,sdfTime,sdfDate2,sdfTime2;
+    private FirebaseAuth mAuth;
+    Button backBtn,requestGuestKeyBtn;
+    ImageView guestQrcodeView;
+    EditText guestNameEdit;
+    String aesPassword;
+    TextView countDownTimeTextView;
+    private GlobalVariable gv;
 
-    TextView textView,textView2;
-    Button buttonDate,buttonTime,buttonDate2,buttonTime2,buttonBack;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest);
-        textView = findViewById(R.id.showTime);
-        textView2 = findViewById(R.id.showTime2);
-        buttonDate = findViewById(R.id.day_btn);
-        buttonDate2 = findViewById(R.id.day_btn2);
-        buttonTime = findViewById(R.id.time_btn);
-        buttonTime2 = findViewById(R.id.time_btn2);
-        buttonBack = findViewById(R.id.back_btn);
-        //日期格式 yyyyMMdd
-        sdfDate = new SimpleDateFormat("yyyyMMdd", Locale.TAIWAN);
-        sdfDate2 = new SimpleDateFormat("yyyyMMdd",Locale.TAIWAN);
-        //時間格式 hhMM
-        sdfTime = new SimpleDateFormat("HH:mm",Locale.TAIWAN);
-        sdfTime2 = new SimpleDateFormat("HH:mm",Locale.TAIWAN);
-        //讓calendar抓取當前時間
-        calendar = Calendar.getInstance();
-        calendar2 = Calendar.getInstance();
-//--------------------------------------------------------------------------------------------------------
-        buttonBack.setOnClickListener(new View.OnClickListener() {
+        backBtn = findViewById(R.id.back_btn);
+        requestGuestKeyBtn = findViewById(R.id.requestGuestKey);
+        guestQrcodeView = findViewById(R.id.guestQrcode);
+        guestNameEdit = findViewById(R.id.guestName);
+        countDownTimeTextView = findViewById(R.id.countDownTime);
+        final GlobalVariable app = (GlobalVariable) getApplication();
+        if(app.switchGuest()){
+            requestGuestKeyBtn.setEnabled(true);
+        }else{
+            requestGuestKeyBtn.setEnabled(false);
+        }
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(guestKey.this,MainActivity2.class);
-                startActivity(intent);
+                finish();
             }
         });
-        datePickerListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                calendar.set(Calendar.YEAR,year);
-                calendar.set(Calendar.MONTH,month);
-                calendar.set(Calendar.DAY_OF_MONTH,day);
-
-                textView.setText(sdfDate.format(calendar.getTime()) +" "+ sdfTime.format(calendar.getTime()));
-            }
-        };
-        datePickerListener2 = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                calendar2.set(Calendar.YEAR,year);
-                calendar2.set(Calendar.MONTH,month);
-                calendar2.set(Calendar.DAY_OF_MONTH,day);
-
-                textView2.setText(sdfDate2.format(calendar2.getTime()) +" "+ sdfTime2.format(calendar2.getTime()));
-            }
-        };
-        /** 日期選擇視窗 **/
-        datePickerDialog = new DatePickerDialog(guestKey.this,
-                datePickerListener,
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH));
-
-        datePickerDialog2 = new DatePickerDialog(guestKey.this,
-                datePickerListener2,
-                calendar2.get(Calendar.YEAR),
-                calendar2.get(Calendar.MONTH),
-                calendar2.get(Calendar.DAY_OF_MONTH));
-//--------------------------------------------------------------------------------------------------------
-
-        /** 時間選擇監聽 **/
-        timePickerListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                calendar.set(Calendar.HOUR_OF_DAY,hour);
-                calendar.set(Calendar.MINUTE,minute);
-
-                textView.setText(sdfDate.format(calendar.getTime()) +" "+ sdfTime.format(calendar.getTime()));
-
-            }
-        };
-        timePickerListener2 = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                calendar2.set(Calendar.HOUR_OF_DAY,hour);
-                calendar2.set(Calendar.MINUTE,minute);
-
-                textView2.setText(sdfDate2.format(calendar2.getTime()) +" "+ sdfTime2.format(calendar2.getTime()));
-
-            }
-        };
-        /** 時間選擇視窗 **/
-        timePickerDialog = new TimePickerDialog(guestKey.this,
-                timePickerListener,
-                calendar.get(Calendar.HOUR_OF_DAY),
-                calendar.get(Calendar.MINUTE),
-                true);
-        timePickerDialog2 = new TimePickerDialog(guestKey.this,
-                timePickerListener2,
-                calendar2.get(Calendar.HOUR_OF_DAY),
-                calendar2.get(Calendar.MINUTE),
-                true);
-//--------------------------------------------------------------------------------------------------------
-        /** 按鈕點擊監聽 **/
-        buttonDate.setOnClickListener(new View.OnClickListener() {
+        requestGuestKeyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                datePickerDialog.show();
-            }
-        });
-        buttonDate2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                datePickerDialog2.show();
-            }
-        });
-        /** 按鈕點擊監聽 **/
-        buttonTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                timePickerDialog.show();
-            }
-        });
-        buttonTime2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                timePickerDialog2.show();
+                requestGuestKeyBtn.setEnabled(false);
+                app.getSwitchGuest(false);
+                String guestName = guestNameEdit.getText().toString();
+                countDownTimeTextView.setText("已新增訪客 "+guestName);
+                aesPassword=AES.cbcEncrypt(guestName,"1234567812344248");
+                updateFirebaseGuestValue(aesPassword);
+                BarcodeEncoder encoder = new BarcodeEncoder();
+                try {
+                    Bitmap bit = encoder.encodeBitmap(aesPassword, BarcodeFormat.QR_CODE, 1000, 1000);
+                    guestQrcodeView.setImageBitmap(bit);
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
+                countDownTime();
             }
         });
     }
+    public void updateFirebaseGuestValue(String AesPas){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        DatabaseReference AesPassword=database.getReference("/guestList/"+guestNameEdit.getText().toString()+"/AesPassword");
+        AesPassword.setValue(AesPas);
+    }
+    public void removeFirebaseGuestValue(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        DatabaseReference AesPassword=database.getReference("/guestList/"+guestNameEdit.getText().toString()+"/AesPassword");
+        AesPassword.removeValue();
+    }
+    public void countDownTime(){
+        final GlobalVariable app = (GlobalVariable) getApplication();
+       new CountDownTimer(10000, 1000) {
+            int time = 10;
+            @Override
+            public void onTick(long millisUntilFinished) {
+                countDownTimeTextView.setText("訪客鑰匙 "+time+" 分鐘後失效!");
+                time--;
+            }
+            @Override
+            public void onFinish() {//结束后的操作
+                removeFirebaseGuestValue();
+                countDownTimeTextView.setText("可以新增訪客鑰匙囉~");
+                requestGuestKeyBtn.setEnabled(true);
+                app.getSwitchGuest(true); //時間過後再進才能重新生成
+            }
+        }.start();
+    }
+
 }

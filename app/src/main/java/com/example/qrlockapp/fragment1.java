@@ -106,7 +106,6 @@ public class fragment1 extends Fragment{
         DatabaseReference ivKey=database.getReference(uid+"/ivKey");
         ivKey.setValue("i am kei");
         AesPassword.setValue(AesPas);
-
     }
     public void jumpToGuest(){
         Intent intent = new Intent(getActivity(),guestKey.class);

@@ -20,7 +20,7 @@
         android:layout_marginTop="84dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="544dp"
-        android:background="@drawable/button_roundle_white"
+        android:background="@drawable/button_roundel_white"
         android:text="個人資料設定"
         android:textSize="35sp" />
 
