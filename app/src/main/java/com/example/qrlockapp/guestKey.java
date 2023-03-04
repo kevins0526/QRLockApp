@@ -59,7 +59,7 @@ public class guestKey extends AppCompatActivity {
                 updateFirebaseGuestValue(aesPassword);
                 BarcodeEncoder encoder = new BarcodeEncoder();
                 try {
-                    Bitmap bit = encoder.encodeBitmap(aesPassword, BarcodeFormat.QR_CODE, 1000, 1000);
+                    Bitmap bit = encoder.encodeBitmap(aesPassword, BarcodeFormat.QR_CODE, 800, 800);
                     guestQrcodeView.setImageBitmap(bit);
                 } catch (WriterException e) {
                     e.printStackTrace();
@@ -83,6 +83,7 @@ public class guestKey extends AppCompatActivity {
     public void countDownTime(){
         final GlobalVariable app = (GlobalVariable) getApplication();
        new CountDownTimer(10000, 1000) {
+            //int time = 60000*30;
             int time = 10;
             @Override
             public void onTick(long millisUntilFinished) {
