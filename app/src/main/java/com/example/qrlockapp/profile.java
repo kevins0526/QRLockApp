@@ -6,27 +6,31 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class profile extends AppCompatActivity {
     private FirebaseAuth Auth;
     TextView name,age,sex,birthday;
     Button backBtn,submit,update;
     AlertDialog dialog;
-
+    FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        name = findViewById(R.id.fullName);
-        age = findViewById(R.id.age);
-        sex = findViewById(R.id.sex);
-        birthday = findViewById(R.id.birthday);
+        getProfile();
         update = findViewById(R.id.updateProfie);
         backBtn = findViewById(R.id.backBtn);
 
@@ -41,7 +45,6 @@ public class profile extends AppCompatActivity {
         submit = view.findViewById(R.id.submit);
         builder.setView(view);
         dialog=builder.create();
-
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,10 +54,19 @@ public class profile extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                name.setText("姓名 :"+eName.getText().toString());
-                age.setText("年齡 :"+eAge.getText().toString());
-                sex.setText("性別 :"+eSex.getText().toString());
-                birthday.setText("生日 :"+eBirthday.getText().toString());
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser user=mAuth.getCurrentUser();
+                String uid = user.getUid();
+                DatabaseReference userName =database.getReference("/userID/"+uid+"/userName");
+                DatabaseReference userAge =database.getReference("/userID/"+uid+"/userAge");
+                DatabaseReference userSex =database.getReference("/userID/"+uid+"/userSex");
+                DatabaseReference userBirthday =database.getReference("/userID/"+uid+"/userBirthday");
+                userName.setValue(eName.getText().toString());
+                userAge.setValue(eAge.getText().toString());
+                userSex.setValue(eSex.getText().toString());
+                userBirthday.setValue(eBirthday.getText().toString());
+                getProfile();
                 dialog.dismiss();
             }
         });
@@ -64,6 +76,76 @@ public class profile extends AppCompatActivity {
                 finish();
             }
         });
-    }
 
+    }
+    public void getProfile(){
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user=mAuth.getCurrentUser();
+        String uid = user.getUid();
+        name = findViewById(R.id.fullName);
+        age = findViewById(R.id.age);
+        sex = findViewById(R.id.sex);
+        birthday = findViewById(R.id.birthday);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference userName =database.getReference("/userID/"+uid+"/userName");
+        DatabaseReference userAge =database.getReference("/userID/"+uid+"/userAge");
+        DatabaseReference userSex =database.getReference("/userID/"+uid+"/userSex");
+        DatabaseReference userBirthday =database.getReference("/userID/"+uid+"/userBirthday");
+        userName.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                name.setText("姓名 :"+value);
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("TAG", "Failed to read value.", error.toException());
+            }
+        });
+        userAge.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                age.setText("年齡 :"+value);
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("TAG", "Failed to read value.", error.toException());
+            }
+        });
+        userSex.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                sex.setText("性別 :"+value);
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("TAG", "Failed to read value.", error.toException());
+            }
+        });
+        userBirthday.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                birthday.setText("生日 :"+value);
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("TAG", "Failed to read value.", error.toException());
+            }
+        });
+    }
 }

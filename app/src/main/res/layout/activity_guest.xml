@@ -26,9 +26,10 @@
         android:id="@+id/guestQrcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="72dp"
-        app:layout_constraintBottom_toTopOf="@+id/guestName"
+        android:layout_marginBottom="112dp"
+        app:layout_constraintBottom_toTopOf="@+id/countDownTime"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         tools:srcCompat="@null" />
 
@@ -66,11 +67,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="歡迎使用訪客鑰匙"
-        app:layout_constraintBottom_toTopOf="@+id/guestName"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guestQrcode"
-        app:layout_constraintVertical_bias="0.792" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.769" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

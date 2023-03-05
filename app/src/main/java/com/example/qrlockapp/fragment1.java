@@ -102,8 +102,8 @@ public class fragment1 extends Fragment{
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user=mAuth.getCurrentUser();
         String uid = user.getUid();
-        DatabaseReference AesPassword = database.getReference(uid+"/AesPassword"); //讀取的根結點
-        DatabaseReference ivKey=database.getReference(uid+"/ivKey");
+        DatabaseReference AesPassword = database.getReference("/userID/"+uid+"/AesPassword"); //讀取的根結點
+        DatabaseReference ivKey=database.getReference("/userID/"+uid+"/ivKey");
         ivKey.setValue("i am kei");
         AesPassword.setValue(AesPas);
     }

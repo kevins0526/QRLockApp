@@ -13,24 +13,30 @@
             android:id="@+id/eName"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:hint="姓名" />
+            android:hint="姓名"
+            android:maxLines="1"
+            android:inputType="text"/>
         <EditText
             android:id="@+id/eAge"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:inputType="number"
-            android:hint="年齡"/>
+            android:hint="年齡"
+            android:lines="1"/>
         <EditText
             android:id="@+id/eSex"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:hint="性別"/>
+            android:hint="性別"
+            android:maxLines="1"
+            android:inputType="text"/>
         <EditText
             android:id="@+id/eBirthday"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:inputType="date"
-            android:hint="生日"/>
+            android:hint="生日"
+            android:maxLines="1"/>
 
         <Button
             android:id="@+id/submit"
