@@ -22,6 +22,7 @@
         android:layout_marginBottom="544dp"
         android:background="@drawable/button_roundel_white"
         android:text="個人資料設定"
+        android:textColor="@color/black"
         android:textSize="35sp" />
 
 </RelativeLayout>

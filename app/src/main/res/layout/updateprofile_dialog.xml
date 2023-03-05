@@ -7,27 +7,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="30dp"
+        android:background="@color/gray"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/eName"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:background="@drawable/edit_text_roundel"
             android:hint="姓名"
-            android:maxLines="1"
-            android:inputType="text"/>
+            android:textColorHint="#A9A9A9"
+            android:inputType="text"
+            android:layout_marginBottom="10dp"
+            android:maxLines="1" />
+
         <EditText
             android:id="@+id/eAge"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:inputType="number"
             android:hint="年齡"
+            android:textColorHint="#A9A9A9"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_roundel"
             android:lines="1"/>
         <EditText
             android:id="@+id/eSex"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:hint="性別"
+            android:textColorHint="#A9A9A9"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_roundel"
             android:maxLines="1"
             android:inputType="text"/>
         <EditText
@@ -36,6 +47,9 @@
             android:layout_height="55dp"
             android:inputType="date"
             android:hint="生日"
+            android:textColorHint="#A9A9A9"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_text_roundel"
             android:maxLines="1"/>
 
         <Button
