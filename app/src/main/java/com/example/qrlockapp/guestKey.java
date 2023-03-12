@@ -79,7 +79,8 @@ public class guestKey extends AppCompatActivity {
         requestGuestKeyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                requestGuestKeyBtn.setEnabled(false);
+                requestGuestKeyBtn.setVisibility(View.GONE);
+                guestNameEdit.setVisibility(View.GONE);
                 app.getSwitchGuest(false);
                 String guestName = guestNameEdit.getText().toString();
                 saveName();
