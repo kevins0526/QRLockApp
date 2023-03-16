@@ -43,7 +43,6 @@ public class fragment1 extends Fragment{
         // Inflate the layout for this fragment
         View myView = inflater.inflate(R.layout.fragment_fragment1, container, false);
         AesPassword=readKey();
-
         if(AesPassword!=""){
             //deletedKey();
             ImageView ivCode = (ImageView)myView.findViewById(R.id.imageView4);
@@ -62,7 +61,6 @@ public class fragment1 extends Fragment{
             long IV=Randomize.IV();
             AesPassword = mixKey(uid,IV);
             saveKey();
-            Toast.makeText(getActivity(), AesPassword, Toast.LENGTH_SHORT).show();
             updateFirebaseValue(AesPassword,IV); //傳加密後密碼到firebase
             BarcodeEncoder encoder = new BarcodeEncoder();
             try {
@@ -102,7 +100,6 @@ public class fragment1 extends Fragment{
         long IV=Randomize.IV();
         AesPassword = mixKey(uid,IV);
         saveKey();
-        Toast.makeText(getActivity(), AesPassword, Toast.LENGTH_SHORT).show();
         updateFirebaseValue(AesPassword,IV); //傳加密後密碼到firebase
         BarcodeEncoder encoder = new BarcodeEncoder();
         try {
@@ -118,6 +115,7 @@ public class fragment1 extends Fragment{
         String str=AES.cbcEncrypt(aes,String.valueOf(IV));
         return str;
     }
+
 //    public void onClick(View v) {
 //        getCode();
 //    }

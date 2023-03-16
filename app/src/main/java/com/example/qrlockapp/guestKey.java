@@ -85,7 +85,8 @@ public class guestKey extends AppCompatActivity {
                 String guestName = guestNameEdit.getText().toString();
                 saveName();
                 countDownTimeTextView.setText("已新增訪客 "+guestName);
-                aesPassword=AES.cbcEncrypt(guestName,"1234567812344248");
+                long IV=Randomize.IV();
+                aesPassword=AES.cbcEncrypt(guestName,String.valueOf(IV));
                 updateFirebaseGuestValue(aesPassword);
                 BarcodeEncoder encoder = new BarcodeEncoder();
                 try {
