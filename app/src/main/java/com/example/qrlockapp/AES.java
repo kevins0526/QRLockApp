@@ -58,7 +58,6 @@ public class AES {
      * @param data      待加密内容
      * @return 返回Base64转码后的加密数据
      */
-
 //    public static String encrypt(String data) {
 //        try {
 //            //创建密码器
