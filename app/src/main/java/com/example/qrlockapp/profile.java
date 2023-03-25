@@ -21,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class profile extends AppCompatActivity {
-    private FirebaseAuth Auth;
     TextView name,age,sex,birthday;
     Button backBtn,submit,update;
     AlertDialog dialog;

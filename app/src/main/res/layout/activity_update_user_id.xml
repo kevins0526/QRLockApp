@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".updateUserID">
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/memoji" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        app:cardCornerRadius="25dp"
+        android:layout_marginTop="0dp"
+        android:layout_gravity="center">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:textColor="@color/black"
+        android:text="哈囉!很高興認識你\n請問以後想我們怎麼稱呼你呢?"
+        android:textSize="18dp"
+        android:gravity="center"/>
+    <EditText
+        android:id="@+id/eUserID"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/edit_text_roundel"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="請輸入使用者暱稱"
+        android:inputType="textPersonName"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/updateUserID_Btn"
+        android:layout_width="match_parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="270dp"
+        android:layout_height="50dp"
+        android:text="Button"
+        android:textColor="@color/gray"
+        android:background="@drawable/button_roundel"/>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

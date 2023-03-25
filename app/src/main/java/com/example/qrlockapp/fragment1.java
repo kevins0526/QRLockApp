@@ -59,7 +59,8 @@ public class fragment1 extends Fragment{
             String uid = user.getUid();
             ImageView ivCode = (ImageView)myView.findViewById(R.id.imageView4);
             long IV=Randomize.IV();
-            AesPassword = mixKey(uid,IV);
+            //AesPassword = mixKey(uid,IV);
+            AesPassword = mixKey("kevin",IV);
             saveKey();
             updateFirebaseValue(AesPassword,IV); //傳加密後密碼到firebase
             BarcodeEncoder encoder = new BarcodeEncoder();
@@ -98,6 +99,7 @@ public class fragment1 extends Fragment{
         ImageView ivCode = (ImageView)getView().findViewById(R.id.imageView4);
         //TextView password = (TextView)getView().findViewById(R.id.seepassword);
         long IV=Randomize.IV();
+        //AesPassword = mixKey(uid,IV);
         AesPassword = mixKey(uid,IV);
         saveKey();
         updateFirebaseValue(AesPassword,IV); //傳加密後密碼到firebase
@@ -109,10 +111,9 @@ public class fragment1 extends Fragment{
             e.printStackTrace();
         }
     }
-    public String mixKey(String aes,long IV){ //混合原始資料
-        //String str=AES.encrypt(aes);
-        //Log.i("-=-=解密",AES.decrypt(str));
-        String str=AES.cbcEncrypt(aes,String.valueOf(IV));
+    public String mixKey(String data,long IV){ //混合原始資料
+        //String str=AEScbc.encrypt(data,String.valueOf(IV));
+        String str=AEScbc.encrypt("kevin","1234567812345678");
         return str;
     }
 
