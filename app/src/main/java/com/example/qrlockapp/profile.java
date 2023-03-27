@@ -2,9 +2,7 @@ package com.example.qrlockapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -56,11 +54,11 @@ public class profile extends AppCompatActivity {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 mAuth = FirebaseAuth.getInstance();
                 FirebaseUser user=mAuth.getCurrentUser();
-                String uid = user.getUid();
-                DatabaseReference userName =database.getReference("/userID/"+uid+"/userName");
-                DatabaseReference userAge =database.getReference("/userID/"+uid+"/userAge");
-                DatabaseReference userSex =database.getReference("/userID/"+uid+"/userSex");
-                DatabaseReference userBirthday =database.getReference("/userID/"+uid+"/userBirthday");
+                String displayName = user.getDisplayName();
+                DatabaseReference userName =database.getReference("/userID/"+displayName+"/userName");
+                DatabaseReference userAge =database.getReference("/userID/"+displayName+"/userAge");
+                DatabaseReference userSex =database.getReference("/userID/"+displayName+"/userSex");
+                DatabaseReference userBirthday =database.getReference("/userID/"+displayName+"/userBirthday");
                 userName.setValue(eName.getText().toString());
                 userAge.setValue(eAge.getText().toString());
                 userSex.setValue(eSex.getText().toString());
@@ -80,16 +78,16 @@ public class profile extends AppCompatActivity {
     public void getProfile(){
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user=mAuth.getCurrentUser();
-        String uid = user.getUid();
+        String displayName = user.getDisplayName();
         name = findViewById(R.id.fullName);
         age = findViewById(R.id.age);
         sex = findViewById(R.id.sex);
         birthday = findViewById(R.id.birthday);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference userName =database.getReference("/userID/"+uid+"/userName");
-        DatabaseReference userAge =database.getReference("/userID/"+uid+"/userAge");
-        DatabaseReference userSex =database.getReference("/userID/"+uid+"/userSex");
-        DatabaseReference userBirthday =database.getReference("/userID/"+uid+"/userBirthday");
+        DatabaseReference userName =database.getReference("/userID/"+displayName+"/userName");
+        DatabaseReference userAge =database.getReference("/userID/"+displayName+"/userAge");
+        DatabaseReference userSex =database.getReference("/userID/"+displayName+"/userSex");
+        DatabaseReference userBirthday =database.getReference("/userID/"+displayName+"/userBirthday");
         userName.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

@@ -32,6 +32,7 @@ public class guestKey extends AppCompatActivity {
     SharedPreferences pref;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     Bitmap bit;
+    long IV;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +86,7 @@ public class guestKey extends AppCompatActivity {
                 String guestName = guestNameEdit.getText().toString();
                 saveName();
                 countDownTimeTextView.setText("已新增訪客 "+guestName);
-                long IV=Randomize.IV();
+                IV=Randomize.IV();
                 aesPassword=AEScbc.encrypt(guestName,String.valueOf(IV));
                 updateFirebaseGuestValue(aesPassword);
                 BarcodeEncoder encoder = new BarcodeEncoder();

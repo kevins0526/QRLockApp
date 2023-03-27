@@ -5,12 +5,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/gray"
     tools:context=".updateUserID">
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_gravity="center"
+        android:background="@color/gray"
         app:srcCompat="@drawable/memoji" />
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"

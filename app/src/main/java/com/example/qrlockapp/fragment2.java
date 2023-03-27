@@ -45,8 +45,8 @@ public class fragment2 extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user=mAuth.getCurrentUser();
-        String uid = user.getUid();
-        DatabaseReference memberData = database.getReference("/userID/"+uid);
+        String displayName = user.getDisplayName();
+        DatabaseReference memberData = database.getReference("/userID/"+displayName);
                 memberData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

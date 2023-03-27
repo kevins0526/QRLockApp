@@ -30,8 +30,8 @@ public class AEScbc {
             IvParameterSpec ivSpec = new IvParameterSpec(iv);
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
             byte[] encryped = cipher.doFinal(plaintext);
-            //return base64Encode(addBytes(encryped,iv));
-            return base64Encode(encryped);
+            return base64Encode(addBytes(encryped,iv));
+            //return base64Encode(encryped);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
