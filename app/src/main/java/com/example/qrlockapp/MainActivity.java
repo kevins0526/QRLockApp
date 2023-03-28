@@ -88,15 +88,15 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                if(user.getDisplayName() == null){
-                                    Intent intent = new Intent();
-                                    intent.setClass(MainActivity.this, updateUserID.class);
-                                    startActivity(intent);
-                                }else {
-                                    Intent intent = new Intent();
-                                    intent.setClass(MainActivity.this, MainActivity2.class);
-                                    startActivity(intent);
-                                }
+//                                    if (user.getDisplayName() == null) {
+//                                        Intent intent = new Intent();
+//                                        intent.setClass(MainActivity.this, updateUserID.class);
+//                                        startActivity(intent);
+//                                    } else {
+                                        Intent intent = new Intent();
+                                        intent.setClass(MainActivity.this, MainActivity2.class);
+                                        startActivity(intent);
+//                                    }
                             } else {
                                 String msg = "帳號或密碼錯誤!";
                                 TextView wrongPassword = findViewById(R.id.wrong);

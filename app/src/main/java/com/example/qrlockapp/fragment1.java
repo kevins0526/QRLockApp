@@ -53,7 +53,7 @@ public class fragment1 extends Fragment{
             IV=Randomize.IV();
             aesPassword=AEScbc.encrypt(displayName,String.valueOf(IV));
             saveKey();
-            updateFirebaseValue(aesPassword,IV); //傳加密後密碼到firebase
+            //updateFirebaseValue(aesPassword,IV); //傳加密後密碼到firebase
             BarcodeEncoder encoder = new BarcodeEncoder();
             try {
                 Bitmap bit = encoder.encodeBitmap(aesPassword, BarcodeFormat.QR_CODE, 1000, 1000);
@@ -99,8 +99,9 @@ public class fragment1 extends Fragment{
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                if(times>0)
-                getCode();
+                if(times>0) {
+                    getCode();
+                }
                 times++;
             }
             @Override
@@ -116,7 +117,7 @@ public class fragment1 extends Fragment{
         IV=Randomize.IV();
         aesPassword=AEScbc.encrypt(displayName,String.valueOf(IV));
         saveKey();
-        updateFirebaseValue(aesPassword,IV); //傳加密後密碼到firebase
+        //updateFirebaseValue(aesPassword,IV); //傳加密後密碼到firebase
         BarcodeEncoder encoder = new BarcodeEncoder();
         try {
             Bitmap bit = encoder.encodeBitmap(aesPassword, BarcodeFormat.QR_CODE, 1000, 1000);
@@ -128,16 +129,16 @@ public class fragment1 extends Fragment{
 
 
 
-    public void updateFirebaseValue(String aesPas,long IV){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user=mAuth.getCurrentUser();
-        displayName = user.getDisplayName();
-        DatabaseReference AesPassword = database.getReference("/passwordList/"+aesPas); //讀取的根結點
-        DatabaseReference ivKey=database.getReference("/userID/"+displayName+"/ivKey");
-        ivKey.setValue(IV);
-        AesPassword.setValue(displayName);
-    }
+//    public void updateFirebaseValue(String aesPas,long IV){
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        mAuth = FirebaseAuth.getInstance();
+//        FirebaseUser user=mAuth.getCurrentUser();
+//        displayName = user.getDisplayName();
+//        DatabaseReference AesPassword = database.getReference("/passwordList/"+aesPas); //讀取的根結點
+//        DatabaseReference ivKey=database.getReference("/userID/"+displayName+"/ivKey");
+//        ivKey.setValue(IV);
+//        AesPassword.setValue(displayName);
+//    }
     public void jumpToGuest(){
         Intent intent = new Intent(getActivity(),guestKey.class);
         startActivity(intent);
