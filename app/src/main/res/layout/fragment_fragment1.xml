@@ -36,6 +36,7 @@
         android:background="@drawable/button_roundel"
         android:backgroundTint="@null"
         android:text="@string/refresh"
+        android:fontFamily="@font/iansul"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
@@ -67,6 +68,7 @@
         android:layout_marginBottom="50dp"
         android:background="@drawable/button_roundel"
         android:text="訪客"
+        android:fontFamily="@font/iansul"
         android:textSize="20sp"/>
 
 

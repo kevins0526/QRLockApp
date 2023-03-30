@@ -22,6 +22,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:text="某某某"
+            android:fontFamily="@font/iansul"
             android:textSize="25dp"
             android:textColor="@color/black" />
 
@@ -31,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="115dp"
             android:layout_marginTop="80dp"
+            android:fontFamily="@font/iansul"
             android:text="管理室有您的包裹未領取"
             android:textColor="#FF4D40" />
 
@@ -41,6 +43,7 @@
             android:layout_marginStart="115dp"
             android:layout_marginTop="120dp"
             android:text="管理室有您的信件未領取"
+            android:fontFamily="@font/iansul"
             android:textColor="	#FF4D40" />
     </androidx.cardview.widget.CardView>
 </LinearLayout>

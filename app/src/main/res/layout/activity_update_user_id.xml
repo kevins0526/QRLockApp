@@ -25,7 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:textColor="@color/black"
-        android:text="哈囉!很高興認識你\n請問以後想我們怎麼稱呼你呢?"
+        android:text="哈囉!很高興認識你\n\n請問以後想我們怎麼稱呼你呢?"
+        android:fontFamily="@font/iansul"
         android:textSize="18dp"
         android:gravity="center"/>
     <EditText
@@ -40,6 +41,7 @@
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="請輸入使用者暱稱"
+        android:fontFamily="@font/iansul"
         android:inputType="textPersonName"
         android:textColor="@color/black" />
 
@@ -50,7 +52,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginTop="270dp"
         android:layout_height="50dp"
-        android:text="Button"
+        android:text="完成"
         android:textColor="@color/gray"
         android:background="@drawable/button_roundel"/>
 

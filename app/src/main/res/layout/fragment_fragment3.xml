@@ -16,6 +16,7 @@
         android:layout_marginTop="100dp"
         android:background="@drawable/button_roundel_white"
         android:text="登出帳號"
+        android:fontFamily="@font/iansul"
         android:textColor="@color/black"
         android:textSize="35sp" />
 
@@ -28,6 +29,7 @@
         android:layout_marginEnd="25dp"
         android:background="@drawable/button_roundel_white"
         android:text="個人資料設定"
+        android:fontFamily="@font/iansul"
         android:textColor="@color/black"
         android:textSize="35sp" />
 
@@ -40,6 +42,7 @@
         android:layout_marginEnd="25dp"
         android:background="@drawable/button_roundel_white"
         android:text="關於我們"
+        android:fontFamily="@font/iansul"
         android:textColor="@color/black"
         android:textSize="35sp" />
 </LinearLayout>
