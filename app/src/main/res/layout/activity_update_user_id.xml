@@ -29,21 +29,24 @@
         android:fontFamily="@font/iansul"
         android:textSize="18dp"
         android:gravity="center"/>
-    <EditText
-        android:id="@+id/eUserID"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="130dp"
-        android:background="@drawable/edit_text_roundel"
-        android:drawableLeft="@drawable/ic_baseline_person_24"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="請輸入使用者暱稱"
-        android:fontFamily="@font/iansul"
-        android:inputType="textPersonName"
-        android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/eUserID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/edit_text_roundel"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:fontFamily="@font/iansul"
+            android:hint="請輸入使用者暱稱"
+            android:inputType="textPersonName"
+            android:maxLength="12"
+            android:minHeight="48dp"
+            android:textColor="@color/black" />
 
     <Button
         android:id="@+id/updateUserID_Btn"
@@ -51,10 +54,22 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="270dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:text="完成"
+        android:textSize="18dp"
         android:textColor="@color/gray"
+        android:fontFamily="@font/iansul"
         android:background="@drawable/button_roundel"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/iansul"
+            android:text="最多12個字元的暱稱喔~"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
 
     </androidx.cardview.widget.CardView>
 

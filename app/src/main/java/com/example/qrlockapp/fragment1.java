@@ -45,11 +45,17 @@ public class fragment1 extends Fragment{
         View myView = inflater.inflate(R.layout.fragment_fragment1, container, false);
         pref = getActivity().getSharedPreferences("PREF",MODE_PRIVATE);
         aesPassword=readKey();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user=mAuth.getCurrentUser();
+        displayName = user.getDisplayName();
         ivCode = (ImageView)myView.findViewById(R.id.imageView4);
+        if(!displayName.equals(readDisplayName())){
+            aesPassword = "";
+        }else{
+            aesPassword = readKey();
+        }
         if(aesPassword.equals("")){
-            mAuth = FirebaseAuth.getInstance();
-            FirebaseUser user=mAuth.getCurrentUser();
-            displayName = user.getDisplayName();
             IV=Randomize.IV();
             aesPassword=AEScbc.encrypt(displayName,String.valueOf(IV));
             saveKey();
@@ -88,9 +94,6 @@ public class fragment1 extends Fragment{
                 jumpToGuest();
             }
         });
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user=mAuth.getCurrentUser();
         displayName = user.getDisplayName();
         DatabaseReference loginTime = database.getReference("/userID/"+displayName+"/loginTime");
         loginTime.addValueEventListener(new ValueEventListener() {
@@ -146,9 +149,13 @@ public class fragment1 extends Fragment{
     public void saveKey(){
         pref.edit()
                 .putString("KEY",aesPassword)
+                .putString("DisplayName",displayName)
                 .apply();                   //或commit()
     }
     public String readKey(){
         return pref.getString("KEY","");
+    }
+    public String readDisplayName(){
+        return pref.getString("DisplayName","");
     }
 }

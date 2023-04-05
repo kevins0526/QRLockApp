@@ -16,8 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class updateUserID extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -37,22 +40,55 @@ public class updateUserID extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     String displayName = eUserID.getText().toString();
-                    DatabaseReference newUser=database.getReference("/userID/"+displayName+"/userDisplayName/");
-                    newUser.setValue(displayName);
-                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                            .setDisplayName(displayName)
-                            .build();
-                    user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(updateUserID.this,user.getDisplayName(),Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent();
-                                        intent.setClass(updateUserID.this, MainActivity2.class);
-                                        startActivity(intent);
+                    DatabaseReference existDisplayName = database.getReference("/userID/"+displayName);
+                    existDisplayName.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                // 节点存在
+                                Toast.makeText(updateUserID.this,"已有用戶名請重新命名",Toast.LENGTH_SHORT).show();
+                            } else {
+                                // 节点不存在
+                                DatabaseReference newUser=database.getReference("/userID/"+displayName+"/userDisplayName/");
+                                newUser.setValue(displayName);
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(displayName)
+                                        .build();
+                                user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(updateUserID.this,user.getDisplayName()+"歡迎你",Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent();
+                                            intent.setClass(updateUserID.this, MainActivity2.class);
+                                            startActivity(intent);
+                                        }
                                     }
-                                }
-                            });
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            // 处理取消事件
+                        }
+                    });
+//                    DatabaseReference newUser=database.getReference("/userID/"+displayName+"/userDisplayName/");
+//                    newUser.setValue(displayName);
+//                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+//                            .setDisplayName(displayName)
+//                            .build();
+//                    user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    if (task.isSuccessful()) {
+//                                        Toast.makeText(updateUserID.this,user.getDisplayName()+"歡迎你",Toast.LENGTH_SHORT).show();
+//                                        Intent intent = new Intent();
+//                                        intent.setClass(updateUserID.this, MainActivity2.class);
+//                                        startActivity(intent);
+//                                    }
+//                                }
+//                            });
                 }
             });
         }
