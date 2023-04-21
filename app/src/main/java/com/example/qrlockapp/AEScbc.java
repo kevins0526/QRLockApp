@@ -4,14 +4,43 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import android.util.Base64;
+import android.util.Log;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AEScbc {
+    private static FirebaseAuth mAuth;
+    private static String displayName;
+    //public static String floor;
     private static final String secretKey = "Chin_Yi_"+BuildConfig.AES_KEY_PART2; //利用JAVA硬編碼 + BuildConfig中的方式增加安全性
     public static String encrypt(String data, String ivString) {
-
-        // 偏移量
-        //String ivString = "1234567890123456";
-
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        mAuth = FirebaseAuth.getInstance();
+//        FirebaseUser user=mAuth.getCurrentUser();
+//        displayName = user.getDisplayName();
+//
+//        DatabaseReference userFloor = database.getReference("/userID/"+displayName+"/userFloor/");
+//        userFloor.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                floor = snapshot.getValue(String.class);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+        //String a ="E531";
         byte[] iv = ivString.getBytes();
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
@@ -30,8 +59,8 @@ public class AEScbc {
             IvParameterSpec ivSpec = new IvParameterSpec(iv);
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
             byte[] encryped = cipher.doFinal(plaintext);
-            return base64Encode(addBytes(encryped,iv));
-            //return base64Encode(encryped);
+            //return base64Encode(addBytes(encryped,iv));
+            return base64Encode(encryped);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -40,8 +69,6 @@ public class AEScbc {
     }
 
     public static String desEncrypt(String data) {
-
-
         try {
             byte[] encryp = base64Decode(data);
             byte[] encryp1 = splitBytesToData(encryp);
@@ -81,5 +108,25 @@ public class AEScbc {
         byte[] dataIv = new byte[16];
         System.arraycopy(data, data.length - 16, dataIv, 0, 16);
         return dataIv;
+    }
+    public static void getFloor(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user=mAuth.getCurrentUser();
+        displayName = user.getDisplayName();
+
+        DatabaseReference userFloor = database.getReference("/userID/"+displayName+"/userFloor/");
+        userFloor.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                floor = snapshot.getValue(String.class);
+//                Log.e("SET",floor);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

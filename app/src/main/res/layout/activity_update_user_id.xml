@@ -44,7 +44,7 @@
             android:fontFamily="@font/iansul"
             android:hint="請輸入使用者暱稱"
             android:inputType="textPersonName"
-            android:maxLength="12"
+            android:maxLength="11"
             android:minHeight="48dp"
             android:textColor="@color/black" />
 
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/iansul"
-            android:text="最多12個字元的暱稱喔~"
+            android:text="最多11個字元的暱稱喔~"
             android:textColor="@color/black"
             android:textSize="14dp" />
 

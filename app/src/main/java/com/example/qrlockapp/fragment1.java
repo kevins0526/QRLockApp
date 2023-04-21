@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,31 +44,19 @@ public class fragment1 extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View myView = inflater.inflate(R.layout.fragment_fragment1, container, false);
+        AEScbc.getFloor();
         pref = getActivity().getSharedPreferences("PREF",MODE_PRIVATE);
-        aesPassword=readKey();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user=mAuth.getCurrentUser();
         displayName = user.getDisplayName();
         ivCode = (ImageView)myView.findViewById(R.id.imageView4);
+
         if(!displayName.equals(readDisplayName())){
             aesPassword = "";
+            getCode();
         }else{
             aesPassword = readKey();
-        }
-        if(aesPassword.equals("")){
-            IV=Randomize.IV();
-            aesPassword=AEScbc.encrypt(displayName,String.valueOf(IV));
-            saveKey();
-            //updateFirebaseValue(aesPassword,IV); //傳加密後密碼到firebase
-            BarcodeEncoder encoder = new BarcodeEncoder();
-            try {
-                Bitmap bit = encoder.encodeBitmap(aesPassword, BarcodeFormat.QR_CODE, 1000, 1000);
-                ivCode.setImageBitmap(bit);
-            } catch (WriterException e) {
-                e.printStackTrace();
-            }
-        }else{
             BarcodeEncoder encoder = new BarcodeEncoder();
             try {
                 Bitmap bit = encoder.encodeBitmap(aesPassword, BarcodeFormat.QR_CODE, 1000, 1000);
@@ -76,6 +65,7 @@ public class fragment1 extends Fragment{
                 e.printStackTrace();
             }
         }
+
         CreateBtn = (Button) myView.findViewById(R.id.create_btn);
         GuestBtn = (Button) myView.findViewById(R.id.guest_btn);
 
@@ -83,8 +73,9 @@ public class fragment1 extends Fragment{
             @Override
             public void onClick(View view) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference deleteKey = database.getReference("/passwordList/"+aesPassword);
-                deleteKey.removeValue();
+//                DatabaseReference deleteKey = database.getReference("/passwordList/"+aesPassword);
+//                deleteKey.removeValue();
+                deleteAesPassword(aesPassword);
                 getCode();
             }
         });
@@ -113,14 +104,15 @@ public class fragment1 extends Fragment{
         });
         return  myView;
     }
+
     public void getCode() {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user=mAuth.getCurrentUser();
         displayName = user.getDisplayName();
         IV=Randomize.IV();
         aesPassword=AEScbc.encrypt(displayName,String.valueOf(IV));
+        updateAesPassword(aesPassword,String.valueOf(IV));
         saveKey();
-        //updateFirebaseValue(aesPassword,IV); //傳加密後密碼到firebase
         BarcodeEncoder encoder = new BarcodeEncoder();
         try {
             Bitmap bit = encoder.encodeBitmap(aesPassword, BarcodeFormat.QR_CODE, 1000, 1000);
@@ -129,19 +121,6 @@ public class fragment1 extends Fragment{
             e.printStackTrace();
         }
     }
-
-
-
-//    public void updateFirebaseValue(String aesPas,long IV){
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        mAuth = FirebaseAuth.getInstance();
-//        FirebaseUser user=mAuth.getCurrentUser();
-//        displayName = user.getDisplayName();
-//        DatabaseReference AesPassword = database.getReference("/passwordList/"+aesPas); //讀取的根結點
-//        DatabaseReference ivKey=database.getReference("/userID/"+displayName+"/ivKey");
-//        ivKey.setValue(IV);
-//        AesPassword.setValue(displayName);
-//    }
     public void jumpToGuest(){
         Intent intent = new Intent(getActivity(),guestKey.class);
         startActivity(intent);
@@ -151,6 +130,16 @@ public class fragment1 extends Fragment{
                 .putString("KEY",aesPassword)
                 .putString("DisplayName",displayName)
                 .apply();                   //或commit()
+    }
+    public void updateAesPassword(String aesPassword,String IV){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference userPassword =database.getReference("/aesPassword/"+aesPassword);
+        userPassword.setValue(IV);
+    }
+    public void deleteAesPassword(String aesPassword){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference userPassword =database.getReference("/aesPassword/"+aesPassword);
+        userPassword.removeValue();
     }
     public String readKey(){
         return pref.getString("KEY","");

@@ -56,7 +56,7 @@
         android:layout_height="51dp"
         android:background="@drawable/edit_text_roundel"
         android:ems="10"
-        android:maxLength="12"
+        android:maxLength="11"
         android:hint="請輸入訪客姓名"
         android:fontFamily="@font/iansul"
         android:inputType="textPersonName"
