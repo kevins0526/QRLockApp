@@ -94,6 +94,7 @@ public class fragment1 extends Fragment{
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 if(times>0) {
+                    deleteAesPassword(aesPassword);
                     getCode();
                 }
                 times++;

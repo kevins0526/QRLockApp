@@ -1,6 +1,5 @@
 package com.example.qrlockapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
@@ -12,22 +11,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class guestKey extends AppCompatActivity {
-    private FirebaseAuth mAuth;
     Button backBtn,requestGuestKeyBtn;
     ImageView guestQrcodeView;
     EditText guestNameEdit;
-    String aesPassword;
+    public static String aesPassword;
     TextView countDownTimeTextView;
     SharedPreferences pref;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -51,25 +49,14 @@ public class guestKey extends AppCompatActivity {
             //requestGuestKeyBtn.setEnabled(false);
             requestGuestKeyBtn.setVisibility(View.GONE);
             guestNameEdit.setVisibility(View.GONE);
-            String tempName=read();
-            DatabaseReference guest =database.getReference("/guestList/"+tempName+"/AesPassword");
-            guest.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String tempPassword = dataSnapshot.getValue(String.class);
-                    BarcodeEncoder encoder1 = new BarcodeEncoder();
+            String tempKey=read();
+            BarcodeEncoder encoder1 = new BarcodeEncoder();
                     try {
-                        Bitmap bit = encoder1.encodeBitmap(tempPassword, BarcodeFormat.QR_CODE, 800, 800);
+                        Bitmap bit = encoder1.encodeBitmap(tempKey, BarcodeFormat.QR_CODE, 800, 800);
                         guestQrcodeView.setImageBitmap(bit);
                     } catch (WriterException e) {
                         e.printStackTrace();
                     }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
         }
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,12 +70,13 @@ public class guestKey extends AppCompatActivity {
                 requestGuestKeyBtn.setVisibility(View.GONE);
                 guestNameEdit.setVisibility(View.GONE);
                 app.getSwitchGuest(false);
-                String guestName = guestNameEdit.getText().toString();
-                saveName();
-                countDownTimeTextView.setText("已新增訪客 "+guestName);
+                String name = guestNameEdit.getText().toString();
+                String guestName = "guest_"+name;
+                //countDownTimeTextView.setText(name+"訪客鑰匙到期時間為"+getDateTime());
                 IV=Randomize.IV();
                 aesPassword=AEScbc.encrypt(guestName,String.valueOf(IV));
-                updateFirebaseGuestValue(aesPassword);
+                saveName();
+                updateAesPassword(aesPassword,String.valueOf(IV));
                 BarcodeEncoder encoder = new BarcodeEncoder();
                 try {
                     bit = encoder.encodeBitmap(aesPassword, BarcodeFormat.QR_CODE, 800, 800);
@@ -100,17 +88,13 @@ public class guestKey extends AppCompatActivity {
             }
         });
     }
-    public void updateFirebaseGuestValue(String AesPas){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-        DatabaseReference AesPassword=database.getReference("/guestList/"+guestNameEdit.getText().toString()+"/AesPassword");
-        AesPassword.setValue(AesPas);
+    public void updateAesPassword(String aesPassword,String IV){
+        DatabaseReference userPassword =database.getReference("/aesPassword/"+aesPassword);
+        userPassword.setValue(IV);
     }
-    public void removeFirebaseGuestValue(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        mAuth = FirebaseAuth.getInstance();
-        DatabaseReference AesPassword=database.getReference("/guestList/"+guestNameEdit.getText().toString()+"/AesPassword");
-        AesPassword.removeValue();
+    public void deleteAesPassword(String aesPassword){
+        DatabaseReference userPassword =database.getReference("/aesPassword/"+aesPassword);
+        userPassword.removeValue();
     }
     public void countDownTime(){
         final GlobalVariable app = (GlobalVariable) getApplication();
@@ -124,7 +108,7 @@ public class guestKey extends AppCompatActivity {
             }
             @Override
             public void onFinish() {//结束后的操作
-                removeFirebaseGuestValue();
+                deleteAesPassword(aesPassword);
                 clear();
                 countDownTimeTextView.setText("可以新增訪客鑰匙囉~");
                 requestGuestKeyBtn.setEnabled(true);
@@ -136,14 +120,16 @@ public class guestKey extends AppCompatActivity {
         pref = getSharedPreferences("DATA",MODE_PRIVATE);
         pref.edit()
                 .putString("NAME",guestNameEdit.getText().toString())
+                .putString("KEY",aesPassword)
                 .apply();                   //或commit()
     }
     //讀取資料
     public String read(){
         pref = getSharedPreferences("DATA",MODE_PRIVATE);
         String name = pref.getString("NAME","");
-        countDownTimeTextView.setText("目前顧客鑰匙使用者: "+name);
-        return name;
+        String key = pref.getString("KEY","");
+        countDownTimeTextView.setText(name+"訪客鑰匙時效截止"+getDateTime());
+        return key;
     }
     //清除EditTexts內容
     public void clear(){
@@ -154,4 +140,16 @@ public class guestKey extends AppCompatActivity {
         editor.commit();
 
     }
+    private String getDateTime() {
+        // 獲取當前時間
+        Calendar calendar = Calendar.getInstance();
+        // 添加30分鐘
+        calendar.add(Calendar.SECOND, 10);
+        calendar.add(Calendar.HOUR,8);
+        // 將時間格式化為你需要的格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+        String newTime = sdf.format(calendar.getTime());
+        return newTime;
+    }
+
 }

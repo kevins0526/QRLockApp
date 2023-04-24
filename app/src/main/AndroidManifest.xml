@@ -45,13 +45,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".getApplication"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".MainActivity2"
             android:exported="false"
             android:screenOrientation="portrait">

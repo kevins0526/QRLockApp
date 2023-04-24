@@ -59,7 +59,6 @@ public class AEScbc {
             IvParameterSpec ivSpec = new IvParameterSpec(iv);
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
             byte[] encryped = cipher.doFinal(plaintext);
-            //return base64Encode(addBytes(encryped,iv));
             return base64Encode(encryped);
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -68,22 +67,21 @@ public class AEScbc {
         }
     }
 
-    public static String desEncrypt(String data) {
-        try {
-            byte[] encryp = base64Decode(data);
-            byte[] encryp1 = splitBytesToData(encryp);
-            byte[] iv = splitBytesToIV(encryp);
-            Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
-            SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(), "AES");
-            IvParameterSpec ivSpec = new IvParameterSpec(iv);
-            cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
-            byte[] original = cipher.doFinal(encryp1);
-            return new String(original);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-        return null;
-    }
+//    public static String desEncrypt(String data) {
+//        try {
+//            byte[] encryp = base64Decode(data);
+//            byte[] encryp1 = splitBytesToData(encryp);
+//            Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
+//            SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(), "AES");
+//            IvParameterSpec ivSpec = new IvParameterSpec(iv);
+//            cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
+//            byte[] original = cipher.doFinal(encryp1);
+//            return new String(original);
+//        } catch (Exception e) {
+//            // TODO: handle exception
+//        }
+//        return null;
+//    }
 
     public static String base64Encode(byte[] data) {
         return Base64.encodeToString(data, Base64.NO_WRAP);
@@ -97,17 +95,6 @@ public class AEScbc {
         System.arraycopy(data1, 0, data3, 0, data1.length);
         System.arraycopy(data2, 0, data3, data1.length, data2.length);
         return data3;
-    }
-    public static byte[] splitBytesToData(byte[] data) {
-        byte[] newData = new byte[16];
-        System.arraycopy(data, 0, newData, 0, data.length - 16);
-        return newData;
-    }
-
-    public static byte[] splitBytesToIV(byte[] data) {
-        byte[] dataIv = new byte[16];
-        System.arraycopy(data, data.length - 16, dataIv, 0, 16);
-        return dataIv;
     }
     public static void getFloor(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
