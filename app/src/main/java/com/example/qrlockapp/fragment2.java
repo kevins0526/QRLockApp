@@ -32,6 +32,8 @@ public class fragment2 extends Fragment {
     private RecyclerView mRecyclerView;
     private MyAdapter mAdapter;
     private List<Object> mData;
+    String realName;
+    String userFloor;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,7 +48,31 @@ public class fragment2 extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user=mAuth.getCurrentUser();
         String displayName = user.getDisplayName();
-        DatabaseReference memberData = database.getReference("/userID/"+displayName);
+        DatabaseReference realNamePath = database.getReference("/userID/"+displayName+"/userName/");
+        realNamePath.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                realName = snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        DatabaseReference userFloorPath = database.getReference("/userID/"+displayName+"/房號/");
+        userFloorPath.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userFloor = snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        DatabaseReference memberData = database.getReference("/Resident/"+userFloor+"/"+realName);
                 memberData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

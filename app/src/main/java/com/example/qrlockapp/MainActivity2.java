@@ -19,12 +19,6 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user.getDisplayName() == null) {
-            Intent intent = new Intent();
-            intent.setClass(MainActivity2.this, updateUserID.class);
-            startActivity(intent);
-        } else {
             navigationBarView = findViewById(R.id.navigation);
             if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout, new fragment1()).commit(); // 切換主畫面
@@ -40,11 +34,12 @@ public class MainActivity2 extends AppCompatActivity {
                     } else if (item.getItemId() == R.id.navigation_item3) {
                         Fragment = new fragment3();
                     }
+
                     getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout, Fragment).commit();
                     return true;
                 }
             });
-        }
+
     }
     }
 

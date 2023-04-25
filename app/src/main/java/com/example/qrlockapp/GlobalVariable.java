@@ -7,6 +7,7 @@ public class GlobalVariable extends Application {
     private int b =30;
     // 定義全域變數
     public static String floor;
+    public  static String aesPassword;
     public static boolean lockFloor = false;
     private boolean switchGuest = true;
     public boolean switchGuest(){

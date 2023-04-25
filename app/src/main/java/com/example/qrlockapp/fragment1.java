@@ -3,6 +3,8 @@ package com.example.qrlockapp;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import static com.example.qrlockapp.GlobalVariable.aesPassword;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -34,7 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 public class fragment1 extends Fragment{
     private FirebaseAuth mAuth;
     Button CreateBtn,GuestBtn;
-    String aesPassword="";
+    //String aesPassword="";
     SharedPreferences pref;
     String displayName;
     ImageView ivCode;
@@ -53,10 +55,11 @@ public class fragment1 extends Fragment{
         ivCode = (ImageView)myView.findViewById(R.id.imageView4);
 
         if(!displayName.equals(readDisplayName())){
+            deleteAesPassword(aesPassword);
             aesPassword = "";
             getCode();
         }else{
-            aesPassword = readKey();
+            //aesPassword = readKey();
             BarcodeEncoder encoder = new BarcodeEncoder();
             try {
                 Bitmap bit = encoder.encodeBitmap(aesPassword, BarcodeFormat.QR_CODE, 1000, 1000);
