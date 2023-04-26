@@ -5,51 +5,53 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/gray"
-    tools:context=".updateUserID">
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:background="@color/gray"
-        app:srcCompat="@drawable/memoji" />
+    android:background="@drawable/pic_01"
+    tools:context=".updateLockName">
+
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
         android:layout_height="400dp"
         app:cardCornerRadius="25dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="150dp"
         android:layout_gravity="center">
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:textColor="@color/black"
-        android:text="哈囉!很高興認識你\n\n請問以後想我們怎麼稱呼你呢?"
+        android:text="哈囉!很高興見到你\n\n請先輸入門鎖代碼進行綁定喔!"
         android:fontFamily="@font/iansul"
         android:textSize="18dp"
         android:gravity="center"/>
-
+        <TextView
+            android:id="@+id/tNowLockName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="112dp"
+            android:textColor="@color/blue1"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/iansul"
+            android:text="" />
         <EditText
-            android:id="@+id/eUserID"
+            android:id="@+id/eLockName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="130dp"
+            android:layout_marginTop="150dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/edit_text_roundel"
-            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:drawableLeft="@drawable/ic_baseline_lock_24"
             android:drawablePadding="10dp"
             android:ems="10"
             android:fontFamily="@font/iansul"
-            android:hint="請輸入使用者暱稱"
+            android:hint="請輸入門鎖代碼"
             android:inputType="textPersonName"
             android:maxLength="11"
             android:minHeight="48dp"
             android:textColor="@color/black" />
 
     <Button
-        android:id="@+id/updateUserID_Btn"
+        android:id="@+id/updateLockName_Btn"
         android:layout_width="match_parent"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
@@ -62,14 +64,16 @@
         android:background="@drawable/button_roundel"/>
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tWrongCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/iansul"
-            android:text="最多11個字元的暱稱喔~"
-            android:textColor="@color/black"
+            android:text=""
+            android:textColor="#ff0000"
+            android:layout_marginTop="16dp"
             android:textSize="14dp" />
+
 
     </androidx.cardview.widget.CardView>
 

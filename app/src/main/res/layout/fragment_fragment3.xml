@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray"
+    android:background="@drawable/pic_02"
     tools:context=".fragment3">
 
     <Button
@@ -34,14 +34,14 @@
         android:textSize="35sp" />
 
     <Button
-        android:id="@+id/aboutUs"
+        android:id="@+id/changeLockName"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/button_roundel_white"
-        android:text="關於我們"
+        android:text="更改綁定門鎖"
         android:fontFamily="@font/iansul"
         android:textColor="@color/black"
         android:textSize="35sp" />

@@ -1,5 +1,6 @@
 package com.example.qrlockapp;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +9,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        GlobalVariable gv = (GlobalVariable)getApplicationContext();
         Button button = findViewById(R.id.button);
         TextView textView = findViewById(R.id.forgotPassword);
         mAuth = FirebaseAuth.getInstance();
@@ -88,15 +88,13 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-//                                    if (user.getDisplayName() == null) {
-//                                        Intent intent = new Intent();
-//                                        intent.setClass(MainActivity.this, updateUserID.class);
-//                                        startActivity(intent);
-//                                    } else {
-                                        Intent intent = new Intent();
-                                        intent.setClass(MainActivity.this, MainActivity2.class);
-                                        startActivity(intent);
-//                                    }
+                                Intent intent = new Intent();
+                                if (gv.readLock().equals("")) {
+                                    intent.setClass(MainActivity.this, updateLockName.class);
+                                } else {
+                                    intent.setClass(MainActivity.this, MainActivity2.class);
+                                }
+                                startActivity(intent);
                             } else {
                                 String msg = "帳號或密碼錯誤!";
                                 TextView wrongPassword = findViewById(R.id.wrong);
@@ -117,6 +115,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 }

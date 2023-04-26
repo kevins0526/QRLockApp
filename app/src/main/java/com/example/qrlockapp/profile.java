@@ -34,8 +34,7 @@ public class profile extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("更新資料");
         View view = getLayoutInflater().inflate(R.layout.updateprofile_dialog, null);
-        EditText eName,eAge,eSex,eBirthday;
-        eName = view.findViewById(R.id.eName);
+        EditText eAge,eSex,eBirthday;
         eAge = view.findViewById(R.id.eAge);
         eSex = view.findViewById(R.id.eSex);
         eBirthday = view.findViewById(R.id.eBirthday);
@@ -55,11 +54,9 @@ public class profile extends AppCompatActivity {
                 mAuth = FirebaseAuth.getInstance();
                 FirebaseUser user=mAuth.getCurrentUser();
                 String displayName = user.getDisplayName();
-                DatabaseReference userName =database.getReference("/userID/"+displayName+"/userName");
-                DatabaseReference userAge =database.getReference("/userID/"+displayName+"/userAge");
-                DatabaseReference userSex =database.getReference("/userID/"+displayName+"/userSex");
-                DatabaseReference userBirthday =database.getReference("/userID/"+displayName+"/userBirthday");
-                userName.setValue(eName.getText().toString());
+                DatabaseReference userAge =database.getReference("/userID/"+displayName+"/年齡");
+                DatabaseReference userSex =database.getReference("/userID/"+displayName+"/性別");
+                DatabaseReference userBirthday =database.getReference("/userID/"+displayName+"/生日");
                 userAge.setValue(eAge.getText().toString());
                 userSex.setValue(eSex.getText().toString());
                 userBirthday.setValue(eBirthday.getText().toString());
@@ -84,10 +81,10 @@ public class profile extends AppCompatActivity {
         sex = findViewById(R.id.sex);
         birthday = findViewById(R.id.birthday);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference userName =database.getReference("/userID/"+displayName+"/userName");
-        DatabaseReference userAge =database.getReference("/userID/"+displayName+"/userAge");
-        DatabaseReference userSex =database.getReference("/userID/"+displayName+"/userSex");
-        DatabaseReference userBirthday =database.getReference("/userID/"+displayName+"/userBirthday");
+        DatabaseReference userName =database.getReference("/userID/"+displayName+"/姓名");
+        DatabaseReference userAge =database.getReference("/userID/"+displayName+"/年齡");
+        DatabaseReference userSex =database.getReference("/userID/"+displayName+"/性別");
+        DatabaseReference userBirthday =database.getReference("/userID/"+displayName+"/生日");
         userName.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

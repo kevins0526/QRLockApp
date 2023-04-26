@@ -36,7 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 public class fragment1 extends Fragment{
     private FirebaseAuth mAuth;
     Button CreateBtn,GuestBtn;
-    //String aesPassword="";
+    String time,floor;
     SharedPreferences pref;
     String displayName;
     ImageView ivCode;
@@ -59,7 +59,7 @@ public class fragment1 extends Fragment{
             aesPassword = "";
             getCode();
         }else{
-            //aesPassword = readKey();
+            aesPassword = readKey();
             BarcodeEncoder encoder = new BarcodeEncoder();
             try {
                 Bitmap bit = encoder.encodeBitmap(aesPassword, BarcodeFormat.QR_CODE, 1000, 1000);
@@ -138,7 +138,23 @@ public class fragment1 extends Fragment{
     public void updateAesPassword(String aesPassword,String IV){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference userPassword =database.getReference("/aesPassword/"+aesPassword);
-        userPassword.setValue(IV);
+        userPassword.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // 路徑已存在，執行更新資料的程式碼
+                    getCode();
+                } else {
+                    // 路徑不存在，執行新增資料的程式碼
+                    userPassword.setValue(IV);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //updateAesPassword(aesPassword,IV);
+            }
+        });
     }
     public void deleteAesPassword(String aesPassword){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -151,4 +167,33 @@ public class fragment1 extends Fragment{
     public String readDisplayName(){
         return pref.getString("DisplayName","");
     }
+
+//    public void saveTime(){  //擷取使用者登入時間 ， 放入到TIME下的房號，以便讀取房號登入時間
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference saveTimeRef = database.getReference("/userID/"+displayName+"/loginTime");
+//        DatabaseReference saveFloorRef = database.getReference("/userID/"+displayName+"/房號");
+//        saveTimeRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                time = snapshot.getValue(String.class);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//        saveFloorRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                floor = snapshot.getValue(String.class);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//        });
+//        DatabaseReference updateTimeRef = database.getReference("/Time/"+floor+"/"+displayName);
+//        updateTimeRef.setValue(time);
+//    }
 }
