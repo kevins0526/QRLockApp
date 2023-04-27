@@ -4,11 +4,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="100dp"
+    android:background="@color/white"
     android:gravity="center_vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:background="@color/gray"
+        android:background="#FAFAFA"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
@@ -21,7 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/iansul"
-            android:text=""
+            android:text="用戶暱稱"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:drawablePadding="20dp"
             android:textColor="@color/black"
             android:textSize="18dp" />
 
