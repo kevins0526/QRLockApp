@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class fragment2 extends Fragment {
@@ -32,14 +35,11 @@ public class fragment2 extends Fragment {
     private RecyclerView mRecyclerView;
     private MyAdapter mAdapter;
     private List<Object> mData;
-    String realName;
-    String userFloor;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_fragment2, container, false);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
         mData = new ArrayList<>();
         mAdapter = new MyAdapter(mData);
         mRecyclerView = (RecyclerView)view.findViewById(R.id.my_recycler_view);
@@ -48,45 +48,46 @@ public class fragment2 extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user=mAuth.getCurrentUser();
         String displayName = user.getDisplayName();
-        DatabaseReference realNamePath = database.getReference("/userID/"+displayName+"/userName/");
-        realNamePath.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                realName = snapshot.getValue(String.class);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("Time/E531");
 
-            }
-        });
-        DatabaseReference userFloorPath = database.getReference("/userID/"+displayName+"/房號/");
-        userFloorPath.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userFloor = snapshot.getValue(String.class);
-            }
+        // 使用orderByKey()來依時間排序，並使用limitToLast()來取得最後十筆
+        Query query = ref.orderByKey().limitToLast(10);
 
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int count = 0;
+                List<String> latestEntries = new ArrayList<String>();
 
-            }
-        });
-        DatabaseReference memberData = database.getReference("/Resident/"+userFloor+"/"+realName);
-                memberData.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot snapshot1:snapshot.getChildren()){
-                    Object Key = snapshot1.getKey();
-                    mData.add(Key);
+                // 迭代資料並取出
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    String time = childSnapshot.getKey();
+                    String name = childSnapshot.getValue(String.class);
+                    latestEntries.add("用戶暱稱: " + name + "\n登入時間: " + time );
+                    count++;
                 }
+
+                // 刪除超過十筆的最舊資料
+                if (count > 10) {
+                    DatabaseReference oldestEntryRef = ref.child(latestEntries.get(0).split(":")[0]);
+                    oldestEntryRef.removeValue();
+                }
+
+                // 這裡是取得最新的十筆資料
+                // 資料已經按照時間從晚到早排序了，所以反轉一下
+                Collections.reverse(latestEntries);
+                mData.addAll(latestEntries);
                 mAdapter.notifyDataSetChanged();
             }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle errors
             }
         });
+
         return view;
     }
 }
