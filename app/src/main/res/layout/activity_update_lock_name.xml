@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/pic_01"
+    android:background="@drawable/pic_02"
     tools:context=".updateLockName">
 
     <androidx.cardview.widget.CardView
@@ -32,7 +32,7 @@
             android:id="@+id/tNowLockName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="112dp"
+            android:layout_marginTop="200dp"
             android:textColor="@color/blue1"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/iansul"
@@ -76,7 +76,7 @@
             android:fontFamily="@font/iansul"
             android:text=""
             android:textColor="#ff0000"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="50dp"
             android:textSize="14dp" />
 
 
