@@ -25,6 +25,7 @@ public class guestKey extends AppCompatActivity {
     Button backBtn,requestGuestKeyBtn;
     ImageView guestQrcodeView;
     EditText guestNameEdit;
+    String guestName;
     public static String aesPassword;
     TextView countDownTimeTextView;
     SharedPreferences pref;
@@ -71,7 +72,7 @@ public class guestKey extends AppCompatActivity {
                 guestNameEdit.setVisibility(View.GONE);
                 app.getSwitchGuest(false);
                 String name = guestNameEdit.getText().toString();
-                String guestName = "guest_"+name;
+                guestName = "guest_"+name;
                 //countDownTimeTextView.setText(name+"訪客鑰匙到期時間為"+getDateTime());
                 IV=Randomize.IV();
                 aesPassword=AEScbc.encrypt(guestName,String.valueOf(IV));
@@ -95,15 +96,17 @@ public class guestKey extends AppCompatActivity {
     public void deleteAesPassword(String aesPassword){
         DatabaseReference userPassword =database.getReference("/aesPassword/"+aesPassword);
         userPassword.removeValue();
+        DatabaseReference deleteUserID =database.getReference("/userID/"+guestName);
+        deleteUserID.removeValue();
     }
     public void countDownTime(){
         final GlobalVariable app = (GlobalVariable) getApplication();
-       new CountDownTimer(10000, 1000) {
+       new CountDownTimer(60000, 1000) {
             //int time = 60000*30;
-            int time = 10;
+            int time = 60;
             @Override
             public void onTick(long millisUntilFinished) {
-                countDownTimeTextView.setText("訪客鑰匙 "+time+" 分鐘後失效!");
+                countDownTimeTextView.setText("訪客鑰匙 "+time+" 秒後失效!");
                 time--;
             }
             @Override

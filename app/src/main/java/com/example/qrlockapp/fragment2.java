@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -53,7 +54,7 @@ public class fragment2 extends Fragment {
         DatabaseReference ref = database.getReference("Time/E531");
 
         // 使用orderByKey()來依時間排序，並使用limitToLast()來取得最後十筆
-        Query query = ref.orderByKey().limitToLast(10);
+        Query query = ref.orderByKey().limitToLast(15);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -65,12 +66,17 @@ public class fragment2 extends Fragment {
                 for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
                     String time = childSnapshot.getKey();
                     String name = childSnapshot.getValue(String.class);
-                    latestEntries.add("用戶暱稱: " + name + "\n登入時間: " + time );
+                    if(name.equals("unknown")){
+                        latestEntries.add("未知用戶嘗試開鎖!!" + "\n開鎖時間: " + time);
+
+                    }else {
+                        latestEntries.add("用戶暱稱: " + name + "\n開鎖時間: " + time);
+                    }
                     count++;
                 }
 
                 // 刪除超過十筆的最舊資料
-                if (count > 10) {
+                if (count > 15) {
                     DatabaseReference oldestEntryRef = ref.child(latestEntries.get(0).split(":")[0]);
                     oldestEntryRef.removeValue();
                 }
