@@ -23,12 +23,16 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class guestKey extends AppCompatActivity {
     Button backBtn,requestGuestKeyBtn,shareBtn;
@@ -62,6 +66,8 @@ public class guestKey extends AppCompatActivity {
             guestNameEdit.setVisibility(View.GONE);
             String tempKey=read();
             BarcodeEncoder encoder1 = new BarcodeEncoder();
+            Map<EncodeHintType, ErrorCorrectionLevel> hints = new EnumMap<>(EncodeHintType.class);
+            hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q); // 設定容錯能力為 25%
                     try {
                         Bitmap bit = encoder1.encodeBitmap(tempKey, BarcodeFormat.QR_CODE, 800, 800);
                         guestQrcodeView.setImageBitmap(bit);
@@ -92,6 +98,8 @@ public class guestKey extends AppCompatActivity {
                     saveName();
                     updateAesPassword(aesPassword, String.valueOf(IV));
                     BarcodeEncoder encoder = new BarcodeEncoder();
+                    Map<EncodeHintType, ErrorCorrectionLevel> hints = new EnumMap<>(EncodeHintType.class);
+                    hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q); // 設定容錯能力為 25%
                     try {
                         bit = encoder.encodeBitmap(aesPassword, BarcodeFormat.QR_CODE, 800, 800);
                         guestQrcodeView.setImageBitmap(bit);
