@@ -62,6 +62,7 @@ public class guestKey extends AppCompatActivity {
             guestNameEdit.setVisibility(View.VISIBLE);
         }else{
             //requestGuestKeyBtn.setEnabled(false);
+            shareBtn.setVisibility(View.VISIBLE);
             requestGuestKeyBtn.setVisibility(View.GONE);
             guestNameEdit.setVisibility(View.GONE);
             String tempKey=read();
@@ -69,7 +70,7 @@ public class guestKey extends AppCompatActivity {
             Map<EncodeHintType, ErrorCorrectionLevel> hints = new EnumMap<>(EncodeHintType.class);
             hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q); // 設定容錯能力為 25%
                     try {
-                        Bitmap bit = encoder1.encodeBitmap(tempKey, BarcodeFormat.QR_CODE, 800, 800);
+                        bit = encoder1.encodeBitmap(tempKey, BarcodeFormat.QR_CODE, 800, 800);
                         guestQrcodeView.setImageBitmap(bit);
                     } catch (WriterException e) {
                         e.printStackTrace();
