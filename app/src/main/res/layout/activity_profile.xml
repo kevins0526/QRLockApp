@@ -20,56 +20,41 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.666">        <!--圓角大小-->
 
-            <TextView
-                android:id="@+id/sex"
-                android:layout_width="275dp"
-                android:layout_height="53dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="242dp"
-                android:layout_marginEnd="100dp"
-                android:layout_marginBottom="300dp"
-                android:text="性別"
-                android:fontFamily="@font/iansul"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
 
-            <TextView
-                android:id="@+id/birthday"
-                android:layout_width="275dp"
-                android:layout_height="53dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="327dp"
-                android:layout_marginEnd="100dp"
-                android:layout_marginBottom="220dp"
-                android:text="生日"
-                android:fontFamily="@font/iansul"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
 
-            <TextView
-                android:id="@+id/age"
-                android:layout_width="275dp"
-                android:layout_height="53dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="167dp"
-                android:layout_marginEnd="100dp"
-                android:layout_marginBottom="380dp"
-                android:text="年齡"
-                android:fontFamily="@font/iansul"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
+        <TextView
+            android:id="@+id/Email"
+            android:layout_width="360dp"
+            android:layout_height="70dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="255dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="220dp"
+            android:text="電子信箱"
+            android:fontFamily="@font/iansul"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/phoneNumber"
+            android:layout_width="360dp"
+            android:layout_height="70dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="170dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="380dp"
+            android:fontFamily="@font/iansul"
+            android:text="電話號碼"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/profileTitle"
@@ -88,22 +73,22 @@
                 android:textColor="@color/blue1"
                 android:textSize="40sp" />
 
-            <TextView
-                android:id="@+id/fullName"
-                android:layout_width="275dp"
-                android:layout_height="53dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="85dp"
-                android:layout_marginEnd="100dp"
-                android:layout_marginBottom="460dp"
-                android:text="姓名"
-                android:fontFamily="@font/iansul"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
+        <TextView
+            android:id="@+id/fullName"
+            android:layout_width="360dp"
+            android:layout_height="70dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="85dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="460dp"
+            android:fontFamily="@font/iansul"
+            android:text="姓名"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
 
             <Button
                 android:id="@+id/updateProfie"

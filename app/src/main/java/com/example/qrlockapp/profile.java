@@ -3,6 +3,7 @@ package com.example.qrlockapp;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,10 +20,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class profile extends AppCompatActivity {
-    TextView name,age,sex,birthday;
+    TextView name,number,email;
     Button backBtn,submit,update;
     AlertDialog dialog;
     FirebaseAuth mAuth;
+    String nameValue;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +37,9 @@ public class profile extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("更新資料");
         View view = getLayoutInflater().inflate(R.layout.updateprofile_dialog, null);
-        EditText eAge,eSex,eBirthday;
-        eAge = view.findViewById(R.id.eAge);
-        eSex = view.findViewById(R.id.eSex);
-        eBirthday = view.findViewById(R.id.eBirthday);
+        EditText eNumber,eEmail;
+        eNumber = view.findViewById(R.id.ePhoneNumber);
+        eEmail = view.findViewById(R.id.eEmail);
         submit = view.findViewById(R.id.submit);
         builder.setView(view);
         dialog=builder.create();
@@ -52,14 +54,10 @@ public class profile extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 mAuth = FirebaseAuth.getInstance();
-                FirebaseUser user=mAuth.getCurrentUser();
-                String displayName = user.getDisplayName();
-                DatabaseReference userAge =database.getReference("/userID/"+displayName+"/年齡");
-                DatabaseReference userSex =database.getReference("/userID/"+displayName+"/性別");
-                DatabaseReference userBirthday =database.getReference("/userID/"+displayName+"/生日");
-                userAge.setValue(eAge.getText().toString());
-                userSex.setValue(eSex.getText().toString());
-                userBirthday.setValue(eBirthday.getText().toString());
+                DatabaseReference userNumber =database.getReference("/profile/"+nameValue+"/電話號碼");
+                DatabaseReference userEmail =database.getReference("/profile/"+nameValue+"/電子信箱");
+                userNumber.setValue(eNumber.getText().toString());
+                userEmail.setValue(eEmail.getText().toString());
                 getProfile();
                 dialog.dismiss();
             }
@@ -77,21 +75,49 @@ public class profile extends AppCompatActivity {
         FirebaseUser user=mAuth.getCurrentUser();
         String displayName = user.getDisplayName();
         name = findViewById(R.id.fullName);
-        age = findViewById(R.id.age);
-        sex = findViewById(R.id.sex);
-        birthday = findViewById(R.id.birthday);
+        number = findViewById(R.id.phoneNumber);
+        email = findViewById(R.id.Email);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference userName =database.getReference("/userID/"+displayName+"/姓名");
-        DatabaseReference userAge =database.getReference("/userID/"+displayName+"/年齡");
-        DatabaseReference userSex =database.getReference("/userID/"+displayName+"/性別");
-        DatabaseReference userBirthday =database.getReference("/userID/"+displayName+"/生日");
-        userName.addValueEventListener(new ValueEventListener() {
+        DatabaseReference userProfile =database.getReference("/userID/"+displayName+"/姓名");
+        userProfile.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                name.setText("姓名 :"+value);
+                nameValue = dataSnapshot.getValue(String.class);
+                name.setText("姓名 :"+nameValue);
+                DatabaseReference userNumber =database.getReference("/profile/"+nameValue+"/電話號碼");
+                DatabaseReference userEmail =database.getReference("/profile/"+nameValue+"/電子信箱");
+
+                userNumber.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        number.setText("電話號碼 :"+value);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("TAG", "Failed to read value.", error.toException());
+                    }
+                });
+
+                userEmail.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        String value = dataSnapshot.getValue(String.class);
+                        email.setText("電子信箱 :"+value);
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("TAG", "Failed to read value.", error.toException());
+                    }
+                });
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -99,47 +125,6 @@ public class profile extends AppCompatActivity {
                 Log.w("TAG", "Failed to read value.", error.toException());
             }
         });
-        userAge.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                age.setText("年齡 :"+value);
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("TAG", "Failed to read value.", error.toException());
-            }
-        });
-        userSex.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                sex.setText("性別 :"+value);
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("TAG", "Failed to read value.", error.toException());
-            }
-        });
-        userBirthday.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                birthday.setText("生日 :"+value);
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("TAG", "Failed to read value.", error.toException());
-            }
-        });
+
     }
 }

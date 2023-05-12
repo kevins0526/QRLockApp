@@ -81,12 +81,4 @@ public class updateLockName extends AppCompatActivity {
             }
             });
     }
-//    public void saveLock(String lockName){
-//        pref.edit()
-//                .putString("LOCK",lockName)
-//                .apply();                   //或commit()
-//    }
-//    public String readLock(){
-//        return pref.getString("LOCK","");
-//    }
 }

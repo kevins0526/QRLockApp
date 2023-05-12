@@ -11,35 +11,23 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/eAge"
+            android:id="@+id/ePhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:inputType="number"
-            android:hint="年齡"
+            android:hint="電話號碼"
             android:fontFamily="@font/iansul"
             android:textColor="@color/black"
             android:textColorHint="#A9A9A9"
             android:layout_marginBottom="10dp"
             android:background="@drawable/edit_text_roundel"
             android:lines="1"/>
+
         <EditText
-            android:id="@+id/eSex"
+            android:id="@+id/eEmail"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:hint="性別"
-            android:fontFamily="@font/iansul"
-            android:textColor="@color/black"
-            android:textColorHint="#A9A9A9"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/edit_text_roundel"
-            android:maxLines="1"
-            android:inputType="text"/>
-        <EditText
-            android:id="@+id/eBirthday"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:inputType="date"
-            android:hint="生日"
+            android:hint="電子信箱"
             android:fontFamily="@font/iansul"
             android:textColor="@color/black"
             android:textColorHint="#A9A9A9"

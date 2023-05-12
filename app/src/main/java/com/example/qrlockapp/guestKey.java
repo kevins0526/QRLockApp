@@ -1,5 +1,7 @@
 package com.example.qrlockapp;
 
+import static com.example.qrlockapp.GlobalVariable.lockName;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -161,11 +163,11 @@ public class guestKey extends AppCompatActivity {
         });
     }
     public void updateAesPassword(String aesPassword,String IV){
-        DatabaseReference userPassword =database.getReference("/aesPassword/"+aesPassword);
+        DatabaseReference userPassword =database.getReference("/aesPassword/"+lockName+"/"+aesPassword);
         userPassword.setValue(IV);
     }
     public void deleteAesPassword(String aesPassword){
-        DatabaseReference userPassword =database.getReference("/aesPassword/"+aesPassword);
+        DatabaseReference userPassword =database.getReference("/aesPassword/"+lockName+"/"+aesPassword);
         userPassword.removeValue();
         DatabaseReference deleteUserID =database.getReference("/userID/"+guestName);
         deleteUserID.removeValue();
@@ -220,7 +222,6 @@ public class guestKey extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         // 添加30分鐘
         calendar.add(Calendar.SECOND, 10);
-        calendar.add(Calendar.HOUR,8);
         // 將時間格式化為你需要的格式
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
         String newTime = sdf.format(calendar.getTime());
