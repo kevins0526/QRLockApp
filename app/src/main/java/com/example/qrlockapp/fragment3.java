@@ -29,7 +29,7 @@ public class fragment3 extends Fragment {
         Button profileBtn,signOutBtn,changeLockBtn,clearLockBtn;
         profileBtn = (Button)view.findViewById(R.id.profileBtn);
         signOutBtn = (Button)view.findViewById(R.id.signOutBtn);
-        changeLockBtn = (Button)view.findViewById(R.id.changeLockName);
+        //changeLockBtn = (Button)view.findViewById(R.id.changeLockName);
         clearLockBtn = (Button)view.findViewById(R.id.clearLockRecord);
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,13 +46,13 @@ public class fragment3 extends Fragment {
                 startActivity(intent);
             }
         });
-        changeLockBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),updateLockName.class);
-                startActivity(intent);
-            }
-        });
+//        changeLockBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(),updateLockName.class);
+//                startActivity(intent);
+//            }
+//        });
         clearLockBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,5 +1,7 @@
 package com.example.qrlockapp;
 
+import static com.example.qrlockapp.GlobalVariable.lockName;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -51,7 +53,7 @@ public class fragment2 extends Fragment {
         String displayName = user.getDisplayName();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("Time/E531");
+        DatabaseReference ref = database.getReference("/Time/"+lockName);
 
         // 使用orderByKey()來依時間排序，並使用limitToLast()來取得最後十筆
         Query query = ref.orderByKey().limitToLast(15);

@@ -1,5 +1,7 @@
 package com.example.qrlockapp;
 
+import static com.example.qrlockapp.GlobalVariable.lockName;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -7,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,6 +23,7 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         mAuth = FirebaseAuth.getInstance();
+        //Toast.makeText(this , lockName, Toast.LENGTH_SHORT).show();
             navigationBarView = findViewById(R.id.navigation);
             if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout, new fragment1()).commit(); // 切換主畫面

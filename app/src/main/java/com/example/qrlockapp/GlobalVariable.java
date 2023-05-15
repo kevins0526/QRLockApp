@@ -31,10 +31,11 @@ public class GlobalVariable extends Application {
     public String getLockName() {
         return lockName;
     }
-    public void saveLock(String lockName){
+    public void saveLock(String lock){
         pref.edit()
-                .putString("LOCK",lockName)
+                .putString("LOCK",lock)
                 .apply();                   //或commit()
+        lockName = readLock();
     }
     public String readLock(){
         return pref.getString("LOCK","");

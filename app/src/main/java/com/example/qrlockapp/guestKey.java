@@ -2,6 +2,7 @@ package com.example.qrlockapp;
 
 import static com.example.qrlockapp.GlobalVariable.lockName;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -13,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +24,13 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
@@ -40,12 +47,13 @@ public class guestKey extends AppCompatActivity {
     Button backBtn,requestGuestKeyBtn,shareBtn;
     ImageView guestQrcodeView;
     EditText guestNameEdit;
-    String guestName;
+    String guestName,userName;
     public static String aesPassword;
     TextView countDownTimeTextView;
     SharedPreferences pref;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     Bitmap bit;
+    FirebaseAuth mAuth;
     long IV;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -58,6 +66,9 @@ public class guestKey extends AppCompatActivity {
         guestQrcodeView = findViewById(R.id.guestQrcode);
         guestNameEdit = findViewById(R.id.guestName);
         countDownTimeTextView = findViewById(R.id.countDownTime);
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user=mAuth.getCurrentUser();
+        String displayName = user.getDisplayName();
         final GlobalVariable app = (GlobalVariable) getApplication();
         if(app.switchGuest()){
             requestGuestKeyBtn.setVisibility(View.VISIBLE);
@@ -78,6 +89,18 @@ public class guestKey extends AppCompatActivity {
                         e.printStackTrace();
                     }
         }
+        DatabaseReference userNameRef =database.getReference("/userID/"+displayName+"/姓名");
+        userNameRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userName = snapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,7 +118,7 @@ public class guestKey extends AppCompatActivity {
                     guestNameEdit.setVisibility(View.GONE);
                     shareBtn.setVisibility(View.VISIBLE);
                     app.getSwitchGuest(false);
-                    guestName = "guest_" + name;
+                    guestName = "訪客_" + name+"由"+userName+"授權";
                     IV = Randomize.IV();
                     aesPassword = AEScbc.encrypt(guestName, String.valueOf(IV));
                     saveName();
@@ -111,6 +134,7 @@ public class guestKey extends AppCompatActivity {
                     }
                     countDownTime();
                 }
+                //Toast.makeText(guestKey.this, guestName, Toast.LENGTH_SHORT).show();
             }
         });
         shareBtn.setOnClickListener(new View.OnClickListener() {

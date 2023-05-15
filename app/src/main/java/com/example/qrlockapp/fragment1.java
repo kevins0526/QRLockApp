@@ -51,7 +51,7 @@ public class fragment1 extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View myView = inflater.inflate(R.layout.fragment_fragment1, container, false);
-        AEScbc.getFloor();
+        //AEScbc.getFloor();
         pref = getActivity().getSharedPreferences("PREF",MODE_PRIVATE);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();

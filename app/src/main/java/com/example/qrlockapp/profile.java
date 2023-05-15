@@ -85,7 +85,7 @@ public class profile extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 nameValue = dataSnapshot.getValue(String.class);
-                name.setText("姓名 :"+nameValue);
+                name.setText("姓名 :\n"+nameValue);
                 DatabaseReference userNumber =database.getReference("/profile/"+nameValue+"/電話號碼");
                 DatabaseReference userEmail =database.getReference("/profile/"+nameValue+"/電子信箱");
 
@@ -95,7 +95,7 @@ public class profile extends AppCompatActivity {
                         // This method is called once with the initial value and again
                         // whenever data at this location is updated.
                         String value = dataSnapshot.getValue(String.class);
-                        number.setText("電話號碼 :"+value);
+                        number.setText("電話號碼 :\n"+value);
                     }
                     @Override
                     public void onCancelled(DatabaseError error) {
@@ -110,7 +110,7 @@ public class profile extends AppCompatActivity {
                         // This method is called once with the initial value and again
                         // whenever data at this location is updated.
                         String value = dataSnapshot.getValue(String.class);
-                        email.setText("電子信箱 :"+value);
+                        email.setText("電子信箱 :\n"+value);
                     }
                     @Override
                     public void onCancelled(DatabaseError error) {

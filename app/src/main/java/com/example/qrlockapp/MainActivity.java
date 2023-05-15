@@ -22,7 +22,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private SharedPreferences pref;//暫時存取字串用
@@ -88,12 +92,27 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                FirebaseUser user=mAuth.getCurrentUser();
+                                String displayName = user.getDisplayName();
+                                DatabaseReference lockRef = database.getReference("/userID/"+displayName+"/lockName");
+                                lockRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        gv.saveLock(snapshot.getValue(String.class));
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                                 Intent intent = new Intent();
-                                if (gv.readLock().equals("")) {
-                                    intent.setClass(MainActivity.this, updateLockName.class);
-                                } else {
+//                                if (gv.readLock().equals("")) {
+//                                    intent.setClass(MainActivity.this, updateLockName.class);
+//                                } else {
                                     intent.setClass(MainActivity.this, MainActivity2.class);
-                                }
+//                                }
                                 startActivity(intent);
                             } else {
                                 String msg = "帳號或密碼錯誤!";
