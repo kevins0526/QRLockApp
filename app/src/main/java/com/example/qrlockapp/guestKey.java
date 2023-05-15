@@ -89,18 +89,18 @@ public class guestKey extends AppCompatActivity {
                         e.printStackTrace();
                     }
         }
-        DatabaseReference userNameRef =database.getReference("/userID/"+displayName+"/姓名");
-        userNameRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userName = snapshot.getValue(String.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        DatabaseReference userNameRef =database.getReference("/userID/"+displayName+"/姓名");
+//        userNameRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                userName = snapshot.getValue(String.class);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,7 +118,8 @@ public class guestKey extends AppCompatActivity {
                     guestNameEdit.setVisibility(View.GONE);
                     shareBtn.setVisibility(View.VISIBLE);
                     app.getSwitchGuest(false);
-                    guestName = "訪客_" + name+"由"+userName+"授權";
+//                    guestName = "guest_" + name+"\nauthorized by"+displayName;
+                    guestName = "訪客:" + name;
                     IV = Randomize.IV();
                     aesPassword = AEScbc.encrypt(guestName, String.valueOf(IV));
                     saveName();
