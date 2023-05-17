@@ -17,10 +17,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity2 extends AppCompatActivity {
     NavigationBarView navigationBarView;
+    changeIsSingin changeIsSingin;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        changeIsSingin = new changeIsSingin(getApplicationContext());
+        changeIsSingin.putBoolean(IsSingin.KEY_IS_SINGIN,true);
         setContentView(R.layout.activity_main2);
         mAuth = FirebaseAuth.getInstance();
         //Toast.makeText(this , lockName, Toast.LENGTH_SHORT).show();

@@ -44,6 +44,12 @@ public class fragment3 extends Fragment {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getActivity(),MainActivity.class);
                 startActivity(intent);
+
+                ServiceSetup serviceSetup=new ServiceSetup();
+                serviceSetup.setSkip();
+
+                changeIsSingin changeIsSingin = new changeIsSingin(getActivity());
+                changeIsSingin.putBoolean(IsSingin.KEY_IS_SINGIN,false);
             }
         });
 //        changeLockBtn.setOnClickListener(new View.OnClickListener() {

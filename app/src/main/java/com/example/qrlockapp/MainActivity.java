@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,8 +37,21 @@ public class MainActivity extends AppCompatActivity {
     Activity context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FirebaseApp.initializeApp(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        changeIsSingin changeIsSingin = new changeIsSingin(getApplicationContext());
+
+        if(changeIsSingin.getBoolean(IsSingin.KEY_IS_SINGIN)){
+            Intent intent = new Intent(getApplicationContext(),MainActivity2.class);
+            startActivity(intent);
+            finish();
+        }
+        Intent serviceIntent = new Intent(this, ServiceSetup.class);
+
+        startService(serviceIntent);
         GlobalVariable gv = (GlobalVariable)getApplicationContext();
         Button button = findViewById(R.id.button);
         TextView textView = findViewById(R.id.forgotPassword);

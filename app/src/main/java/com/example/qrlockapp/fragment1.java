@@ -159,7 +159,6 @@ public class fragment1 extends Fragment{
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //updateAesPassword(aesPassword,IV);
             }
         });
     }

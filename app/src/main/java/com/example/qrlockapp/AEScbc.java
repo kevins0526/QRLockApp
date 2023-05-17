@@ -23,23 +23,7 @@ public class AEScbc {
     //public static String floor;
     private static final String secretKey = "Chin_Yi_"+BuildConfig.AES_KEY_PART2; //利用JAVA硬編碼 + BuildConfig中的方式增加安全性
     public static String encrypt(String data, String ivString) {
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        mAuth = FirebaseAuth.getInstance();
-//        FirebaseUser user=mAuth.getCurrentUser();
-//        displayName = user.getDisplayName();
-//
-//        DatabaseReference userFloor = database.getReference("/userID/"+displayName+"/userFloor/");
-//        userFloor.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                floor = snapshot.getValue(String.class);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+
         //String a ="E531";
         byte[] iv = ivString.getBytes();
         try {
@@ -67,21 +51,7 @@ public class AEScbc {
         }
     }
 
-//    public static String desEncrypt(String data) {
-//        try {
-//            byte[] encryp = base64Decode(data);
-//            byte[] encryp1 = splitBytesToData(encryp);
-//            Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
-//            SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(), "AES");
-//            IvParameterSpec ivSpec = new IvParameterSpec(iv);
-//            cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
-//            byte[] original = cipher.doFinal(encryp1);
-//            return new String(original);
-//        } catch (Exception e) {
-//            // TODO: handle exception
-//        }
-//        return null;
-//    }
+
 
     public static String base64Encode(byte[] data) {
         return Base64.encodeToString(data, Base64.NO_WRAP);
@@ -106,8 +76,7 @@ public class AEScbc {
         userFloor.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                floor = snapshot.getValue(String.class);
-//                Log.e("SET",floor);
+
             }
 
             @Override

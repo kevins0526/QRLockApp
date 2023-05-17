@@ -58,41 +58,7 @@ public class AES {
      * @param data      待加密内容
      * @return 返回Base64转码后的加密数据
      */
-//    public static String encrypt(String data) {
-//        try {
-//            //创建密码器
-//            Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
-//            //初始化为加密密码器
-//            cipher.init(Cipher.ENCRYPT_MODE, getSecretKey(secretKey));
-//            byte[] encryptByte = cipher.doFinal(data.getBytes(CHARSET_UTF8));
-//            // 将加密以后的数据进行 Base64 编码
-//            return base64Encode(encryptByte);
-//        } catch (Exception e) {
-//            handleException(e);
-//        }
-//        return null;
-//    }
 
-//    /**
-//     * AES 解密
-//     *
-//     * @param base64Data 加密的密文 Base64 字符串
-//     */
-//    public static String decrypt(String base64Data) {
-//        try {
-//            byte[] data = base64Decode(base64Data);
-//            Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
-//            //设置为解密模式
-//            cipher.init(Cipher.DECRYPT_MODE, getSecretKey(secretKey));
-//            //执行解密操作
-//            byte[] result = cipher.doFinal(data);
-//            return new String(result, CHARSET_UTF8);
-//        } catch (Exception e) {
-//            handleException(e);
-//        }
-//        return null;
-//    }
-    //CBC
     public static String cbcEncrypt(String data, String ivParameter){
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
@@ -107,20 +73,7 @@ public class AES {
         }
         return null;
     }
-//    public static String cbcDecrypt(String data,String ivParameter){
-//        try {
-//            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-//            IvParameterSpec iv = new IvParameterSpec(ivParameter.getBytes(StandardCharsets.UTF_8));
-//            cipher.init(Cipher.DECRYPT_MODE, getSecretKey(secretKey), iv);
-//            //先用base64解密
-//            byte[] encrypted1 = base64Decode(data);
-//            byte[] original = cipher.doFinal(encrypted1);
-//            return new String(original, StandardCharsets.UTF_8);
-//        }catch (Exception e){
-//            handleException(e);
-//        }
-//        return null;
-//    }
+
     /**
      * 使用密码获取 AES 秘钥
      */
