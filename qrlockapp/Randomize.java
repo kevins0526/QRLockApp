@@ -13,5 +13,4 @@ public class Randomize {
             throw new RuntimeException(ex);
         }
     }
-    }
-
+}
