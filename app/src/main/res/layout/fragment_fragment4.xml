@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:screenOrientation="portrait"
+    android:configChanges="orientation"
+    tools:context=".fragment2"
+    >
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="top"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:id="@+id/Hint"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text="公告欄"
+            android:textSize="40sp"
+            android:textColor="@color/white"
+            android:background="@color/blue1"/>
+
+        <Button
+            android:id="@+id/resident"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text="住戶消息"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:background="@color/blue1"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_roundel"
+        android:layout_marginTop="100dp"
+
+        />
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/baseline_add_24"
+
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+       />
+
+
+</RelativeLayout>
