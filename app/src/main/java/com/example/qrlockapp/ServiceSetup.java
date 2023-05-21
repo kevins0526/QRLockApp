@@ -1,5 +1,7 @@
 package com.example.qrlockapp;
 
+import static com.example.qrlockapp.GlobalVariable.lockName;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -32,7 +34,7 @@ public class ServiceSetup extends Service {
     NotificationCompat.Builder builder;
     ValueEventListener valueEventListener;
     NotificationManager notificationManager;
-    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Time/E531");
+    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("/Time/"+lockName);
     private static final String TAG="ServiceSetup";
 
     public void onCreate() {
@@ -57,6 +59,8 @@ public class ServiceSetup extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+
 
 
 
@@ -96,6 +100,8 @@ public class ServiceSetup extends Service {
         };
 
         databaseRef.addValueEventListener(valueEventListener);
+
+
         return START_STICKY;
     }
 

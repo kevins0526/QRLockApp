@@ -133,7 +133,9 @@ public class guestKey extends AppCompatActivity {
                     } catch (WriterException e) {
                         e.printStackTrace();
                     }
-                    countDownTime();
+//                    countDownTime();
+//                    Intent serviceIntent = new Intent(guestKey.this, CountdownService.class);
+//                    startService(serviceIntent);
                 }
                 //Toast.makeText(guestKey.this, guestName, Toast.LENGTH_SHORT).show();
             }

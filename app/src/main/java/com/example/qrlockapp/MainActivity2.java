@@ -41,6 +41,8 @@ public class MainActivity2 extends AppCompatActivity {
                         Fragment = new fragment2();
                     } else if (item.getItemId() == R.id.navigation_item3) {
                         Fragment = new fragment3();
+                    }else if(item.getItemId() == R.id.navigation_item4) {
+                        Fragment =new fragment4();
                     }
 
                     getSupportFragmentManager().beginTransaction().replace(R.id.FrameLayout, Fragment).commit();
